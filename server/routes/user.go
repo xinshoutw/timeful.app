@@ -342,7 +342,11 @@ func addGoogleCalendarAccount(c *gin.Context) {
 	}
 
 	// Get tokens
-	tokens := auth.GetTokensFromAuthCode(payload.Code, payload.Scope, utils.GetOrigin(c), models.GoogleCalendarType)
+	tokens, err := auth.GetTokensFromAuthCode(payload.Code, payload.Scope, utils.GetOrigin(c), models.GoogleCalendarType)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, responses.Error{Error: "OAuth token exchange failed"})
+		return
+	}
 
 	// Get user info from JWT
 	claims := utils.ParseJWT(tokens.IdToken)
@@ -434,7 +438,11 @@ func addOutlookCalendarAccount(c *gin.Context) {
 	authUser := utils.GetAuthUser(c)
 
 	// Get tokens
-	tokens := auth.GetTokensFromAuthCode(payload.Code, payload.Scope, utils.GetOrigin(c), models.OutlookCalendarType)
+	tokens, err := auth.GetTokensFromAuthCode(payload.Code, payload.Scope, utils.GetOrigin(c), models.OutlookCalendarType)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, responses.Error{Error: "OAuth token exchange failed"})
+		return
+	}
 
 	// Get access token expire time
 	accessTokenExpireDate := utils.GetAccessTokenExpireDate(tokens.ExpiresIn)

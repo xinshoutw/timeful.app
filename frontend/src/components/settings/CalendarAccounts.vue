@@ -43,39 +43,6 @@
             "
             @openRemoveDialog="openRemoveDialog"
           ></CalendarAccount>
-          <v-dialog
-            v-if="allowAddCalendarAccount"
-            v-model="addCalendarAccountDialog"
-            width="400"
-            content-class="tw-m-0"
-          >
-            <template v-slot:activator="{ on, attrs }">
-              <div>
-                <v-btn
-                  text
-                  color="primary"
-                  :class="
-                    toggleState
-                      ? '-tw-ml-2 tw-mt-0 tw-w-min tw-px-2'
-                      : '-tw-ml-2 tw-w-fit tw-px-2'
-                  "
-                  v-bind="attrs"
-                  v-on="on"
-                  >+ Add calendar</v-btn
-                >
-                <p class="tw-mb-0 tw-mt-1 tw-text-xs tw-text-dark-gray">
-                  Only your available times are shared with respondents. Your
-                  personal event details are never shared.
-                </p>
-              </div>
-            </template>
-            <CalendarTypeSelector
-              :visible="addCalendarAccountDialog"
-              @addGoogleCalendar="addGoogleCalendar"
-              @addOutlookCalendar="addOutlookCalendar"
-              @addedCalendar="addedCalendar"
-            />
-          </v-dialog>
         </div>
       </span>
     </v-expand-transition>
@@ -98,17 +65,12 @@
 
 <script>
 import { mapState, mapActions, mapMutations } from "vuex"
-import { authTypes, calendarTypes } from "@/constants"
 import {
   get,
-  post,
   _delete,
-  signInGoogle,
-  signInOutlook,
   getCalendarAccountKey,
 } from "@/utils"
 import CalendarAccount from "@/components/settings/CalendarAccount.vue"
-import CalendarTypeSelector from "@/components/settings/CalendarTypeSelector.vue"
 
 export default {
   name: "CalendarAccounts",
@@ -118,7 +80,6 @@ export default {
     eventId: { type: String, default: "" },
     calendarEventsMap: { type: Object, default: () => {} }, // Object of different users' calendar events
     syncWithBackend: { type: Boolean, default: true }, // Whether toggling calendar accounts also updates the backend
-    allowAddCalendarAccount: { type: Boolean, default: true }, // Whether to allow user to add a new calendar account
     initialCalendarAccountsData: { type: Object, default: () => {} }, // Initial data to display for enabled calendar accounts
     fillSpace: { type: Boolean, default: false }, // Whether to fill the available space up
   },
@@ -126,8 +87,6 @@ export default {
   data: () => ({
     removeDialog: false,
     removePayload: {},
-
-    addCalendarAccountDialog: false,
 
     calendarAccounts: {},
     showCalendars:
@@ -151,35 +110,6 @@ export default {
   methods: {
     ...mapActions(["showError", "showInfo", "refreshAuthUser"]),
     ...mapMutations(["setAuthUser"]),
-    addGoogleCalendar() {
-      signInGoogle({
-        state: {
-          type: this.toggleState
-            ? authTypes.ADD_CALENDAR_ACCOUNT_FROM_EDIT
-            : authTypes.ADD_CALENDAR_ACCOUNT,
-          eventId: this.eventId,
-          calendarType: calendarTypes.GOOGLE,
-        },
-        requestCalendarPermission: true,
-        selectAccount: true,
-      })
-    },
-    addOutlookCalendar() {
-      signInOutlook({
-        state: {
-          type: this.toggleState
-            ? authTypes.ADD_CALENDAR_ACCOUNT_FROM_EDIT
-            : authTypes.ADD_CALENDAR_ACCOUNT,
-          eventId: this.eventId,
-          calendarType: calendarTypes.OUTLOOK,
-        },
-        requestCalendarPermission: true,
-      })
-    },
-    addedCalendar() {
-      this.addCalendarAccountDialog = false
-      this.calendarAccounts = this.authUser.calendarAccounts
-    },
     openRemoveDialog(payload) {
       this.removeDialog = true
       this.removePayload = payload
@@ -212,7 +142,6 @@ export default {
 
   components: {
     CalendarAccount,
-    CalendarTypeSelector,
   },
 
   watch: {

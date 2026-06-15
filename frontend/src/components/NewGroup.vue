@@ -111,7 +111,6 @@
           ref="emailInput"
           :addedEmails="addedEmails"
           @update:emails="(newEmails) => (emails = newEmails)"
-          @requestContactsAccess="requestContactsAccess"
         >
           <template v-slot:header>
             <div class="tw-mb-2 tw-text-lg tw-text-black">Members</div>
@@ -171,11 +170,10 @@ import {
   put,
   timeNumToTimeString,
   dateToTimeNum,
-  signInGoogle,
   getDateWithTimezone,
 } from "@/utils"
 import { mapState, mapActions } from "vuex"
-import { eventTypes, dayIndexToDayString, authTypes } from "@/constants"
+import { eventTypes, dayIndexToDayString } from "@/constants"
 import HelpDialog from "./HelpDialog.vue"
 import CalendarPermissionsCard from "./calendar_permission_dialogs/CalendarPermissionsCard.vue"
 import TimezoneSelector from "./schedule_overlap/TimezoneSelector.vue"
@@ -408,25 +406,6 @@ export default {
             this.loading = false
           })
       }
-    },
-    /** Redirects user to oauth page requesting access to the user's contacts */
-    requestContactsAccess({ emails }) {
-      const payload = {
-        emails,
-        name: this.name,
-        startTime: this.startTime,
-        endTime: this.endTime,
-        selectedDaysOfWeek: this.selectedDaysOfWeek,
-      }
-      signInGoogle({
-        state: {
-          type: authTypes.EVENT_CONTACTS,
-          eventId: this.event ? this.event.shortId ?? this.event._id : "",
-          openNewGroup: true,
-          payload,
-        },
-        requestContactsPermission: true,
-      })
     },
     /** Populate fields with data from event */
     updateFieldsFromEvent() {

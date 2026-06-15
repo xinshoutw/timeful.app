@@ -63,7 +63,12 @@ func signIn(c *gin.Context) {
 		return
 	}
 
-	tokens := auth.GetTokensFromAuthCode(payload.Code, payload.Scope, utils.GetOrigin(c), payload.CalendarType)
+	tokens, err := auth.GetTokensFromAuthCode(payload.Code, payload.Scope, utils.GetOrigin(c), payload.CalendarType)
+	if err != nil {
+		logger.StdErr.Printf("Failed to exchange auth code: %v", err)
+		c.JSON(http.StatusBadRequest, responses.Error{Error: "OAuth token exchange failed"})
+		return
+	}
 
 	user, err := signInHelper(c, tokens, models.WEB, payload.CalendarType, *payload.TimezoneOffset)
 	if err != nil {

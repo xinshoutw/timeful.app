@@ -97,11 +97,9 @@
 
 <script>
 import { mapState, mapActions } from "vuex"
-import { authTypes, calendarTypes } from "@/constants"
+import { calendarTypes } from "@/constants"
 import {
   post,
-  _delete,
-  signInGoogle,
   getCalendarAccountKey,
 } from "@/utils"
 import UserAvatarContent from "@/components/UserAvatarContent.vue"
@@ -164,36 +162,9 @@ export default {
 
   methods: {
     ...mapActions(["showError"]),
-    addCalendarAccount() {
-      signInGoogle({
-        state: {
-          type: this.toggleState
-            ? authTypes.ADD_CALENDAR_ACCOUNT_FROM_EDIT
-            : authTypes.ADD_CALENDAR_ACCOUNT,
-          eventId: this.eventId,
-        },
-        requestCalendarPermission: true,
-        selectAccount: true,
-      })
-    },
     reauthenticateCalendarAccount() {
-      if (this.account.calendarType == calendarTypes.GOOGLE) {
-        signInGoogle({
-          state: {
-            type: this.toggleState
-              ? authTypes.ADD_CALENDAR_ACCOUNT_FROM_EDIT
-              : authTypes.ADD_CALENDAR_ACCOUNT,
-            eventId: this.eventId,
-          },
-          requestCalendarPermission: true,
-          selectAccount: false,
-          loginHint: this.account.email,
-        })
-      } else if (this.account.calendarType == calendarTypes.APPLE) {
-        this.openRemoveDialog()
-      } else if (this.account.calendarType == calendarTypes.OUTLOOK) {
-        this.openRemoveDialog()
-      }
+      // Calendar integrations removed; offer to remove the problematic account
+      this.openRemoveDialog()
     },
     toggleSubCalendarAccount(enabled, subCalendarId) {
       if (this.syncWithBackend) {

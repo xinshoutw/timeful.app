@@ -340,7 +340,7 @@
 </style>
 
 <script>
-import { eventTypes, dayIndexToDayString, authTypes } from "@/constants"
+import { eventTypes, dayIndexToDayString } from "@/constants"
 import {
   post,
   put,
@@ -348,7 +348,6 @@ import {
   dateToTimeNum,
   getISODateString,
   isPhone,
-  signInGoogle,
   getDateWithTimezone,
   getTimeOptions,
 } from "@/utils"
@@ -668,37 +667,6 @@ export default {
       } else {
         this.showEmailReminders = !this.showEmailReminders
       }
-    },
-
-    /** Redirects user to oauth page requesting access to the user's contacts */
-    requestContactsAccess({ emails }) {
-      const payload = {
-        emails,
-        name: this.name,
-        startTime: this.startTime,
-        endTime: this.endTime,
-        daysOnly: this.daysOnly,
-        selectedDays: this.selectedDays,
-        selectedDaysOfWeek: this.selectedDaysOfWeek,
-        selectedDateOption: this.selectedDateOption,
-        notificationsEnabled: this.notificationsEnabled,
-        timezone: this.timezone,
-      }
-      signInGoogle({
-        state: {
-          type: authTypes.EVENT_CONTACTS,
-          eventId: this.event ? this.event.shortId ?? this.event._id : "",
-          openNewGroup: false,
-          payload,
-        },
-        requestContactsPermission: true,
-      })
-    },
-    /** Update state based on the contactsPayload after granting contacts access */
-    contactsAccessGranted({ curScheduledEvent, ...data }) {
-      this.curScheduledEvent = curScheduledEvent
-      this.$refs.confirmDetailsDialog?.setData(data)
-      this.confirmDetailsDialog = true
     },
 
     /** Populates the form fields based on this.event */

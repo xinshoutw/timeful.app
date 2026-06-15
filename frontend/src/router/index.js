@@ -114,12 +114,6 @@ router.beforeEach(async (to, from, next) => {
     }
   }
 
-  if (to.name !== "event" && to.name !== "group") {
-    const fusetag = window.fusetag || (window.fusetag = { que: [] })
-    fusetag.que.push(function () {
-      fusetag.destroySticky()
-    })
-  }
 })
 
 export default router

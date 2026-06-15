@@ -3,27 +3,12 @@
     <FormerlyKnownAs
       class="tw-mx-auto tw-mb-10 tw-mt-3 tw-max-w-6xl tw-pl-4 sm:tw-pl-12"
     />
-    <!-- Video Ad (desktop only, when ads enabled) -->
-    <div v-if="!isPhone && showAds" ref="videoAdContainer"></div>
     <div v-if="event" class="tw-mt-8 tw-h-full">
       <!-- Mark availability option dialog -->
       <MarkAvailabilityDialog
         v-model="choiceDialog"
-        :initialState="linkApple ? 'create_account_apple' : 'choices'"
-        @signInLinkApple="signInLinkApple"
-        @allowGoogleCalendar="
-          () => setAvailabilityAutomatically(calendarTypes.GOOGLE)
-        "
-        @allowOutlookCalendar="
-          () => setAvailabilityAutomatically(calendarTypes.OUTLOOK)
-        "
         @setAvailabilityManually="setAvailabilityManually"
-        @addedAppleCalendar="addedAppleCalendar"
-        @addedICSCalendar="addedICSCalendar"
       />
-
-      <!-- Google sign in not supported dialog -->
-      <SignInNotSupportedDialog v-model="webviewDialog" />
 
       <!-- Guest dialog -->
       <GuestDialog
@@ -99,21 +84,6 @@
       <div
         class="tw-mx-auto tw-mt-4 lg:tw-flex lg:tw-items-start lg:tw-justify-center lg:tw-gap-6"
       >
-        <PubliftAd
-          :showAd="showAds"
-          fuseId="meet_vrec_lhs"
-          class="tw-hidden publift-l:tw-block"
-        >
-          <div
-            class="tw-h-[600px] publift-l:tw-w-[160px] publift-xl:tw-w-[300px]"
-          >
-            <div
-              id="meet_vrec_lhs"
-              data-fuse="meet_vrec_lhs"
-              class="tw-flex tw-items-center tw-justify-center"
-            ></div>
-          </div>
-        </PubliftAd>
         <div class="tw-mx-auto tw-max-w-5xl tw-flex-1">
           <div v-if="!isSettingSpecificTimes" class="tw-mx-4">
             <!-- Title and copy link -->
@@ -300,38 +270,7 @@
             @signUpForBlock="initiateSignUpFlow"
           />
         </div>
-        <PubliftAd
-          :showAd="showAds"
-          fuseId="meet_vrec_rhs"
-          class="tw-hidden publift-l:tw-block"
-        >
-          <div
-            class="tw-h-[600px] publift-l:tw-w-[160px] publift-xl:tw-w-[300px]"
-          >
-            <div
-              id="meet_vrec_rhs"
-              data-fuse="meet_vrec_rhs"
-              class="tw-flex tw-items-center tw-justify-center"
-            ></div>
-          </div>
-        </PubliftAd>
       </div>
-
-      <PubliftAd
-        :showAd="showAds"
-        fuseId="meet_incontent_md"
-        class="tw-my-4 tw-hidden !tw-rounded-none sm:tw-block publift-l:tw-hidden"
-      >
-        <div class="tw-h-[300px] publift-m:tw-h-[90px]">
-          <div
-            id="meet_incontent_md"
-            data-fuse="meet_incontent_md"
-            class="tw-flex tw-items-center tw-justify-center"
-          ></div>
-        </div>
-      </PubliftAd>
-
-      <!-- <CarbonAd :ownerIsPremium="ownerIsPremium" /> -->
 
       <template v-if="showFeedbackBtn">
         <div class="tw-w-full tw-border-t tw-border-solid tw-border-gray"></div>
@@ -379,14 +318,11 @@
         </router-link>
       </div>
 
-      <div
-        :class="isPhone ? (showAds ? 'tw-h-[125px]' : 'tw-h-8') : 'tw-h-8'"
-      ></div>
+      <div class="tw-h-8"></div>
       <!-- Bottom bar for phones -->
       <div
         v-if="!isSettingSpecificTimes && isPhone && (!isSignUp || canEdit)"
         class="tw-fixed tw-bottom-0 tw-z-20 tw-flex tw-w-full tw-flex-col"
-        :style="showAds ? { bottom: '115px' } : {}"
       >
         <div
           class="tw-flex tw-h-[4rem] tw-w-full tw-items-center tw-px-4"
@@ -447,26 +383,6 @@
             </v-btn>
           </template>
         </div>
-        <PubliftAd
-          :showAd="showAds"
-          fuseId=""
-          class="tw-h-[115px] tw-w-full !tw-rounded-none !tw-p-0"
-        >
-          <div class="tw-h-[115px]"></div>
-        </PubliftAd>
-      </div>
-      <!-- Fixed bottom ad for desktop -->
-      <div
-        v-if="!isPhone && showAds"
-        class="tw-fixed tw-bottom-0 tw-left-0 tw-z-20 tw-w-full"
-      >
-        <PubliftAd
-          :showAd="showAds"
-          fuseId=""
-          class="tw-h-[115px] tw-w-full !tw-rounded-none !tw-p-0"
-        >
-          <div class="tw-h-[115px]"></div>
-        </PubliftAd>
       </div>
     </div>
   </span>
@@ -476,8 +392,6 @@
 import {
   get,
   post,
-  signInGoogle,
-  signInOutlook,
   isPhone,
   processEvent,
   getCalendarEventsMap,
@@ -521,15 +435,11 @@ import {
   allTimezones,
   guestUserId,
 } from "@/constants"
-import isWebview from "is-ua-webview"
-import SignInNotSupportedDialog from "@/components/SignInNotSupportedDialog.vue"
 import MarkAvailabilityDialog from "@/components/calendar_permission_dialogs/MarkAvailabilityDialog.vue"
 import InvitationDialog from "@/components/groups/InvitationDialog.vue"
 import HelpDialog from "@/components/HelpDialog.vue"
 import EventDescription from "@/components/event/EventDescription.vue"
 import FormerlyKnownAs from "@/components/FormerlyKnownAs.vue"
-import CarbonAd from "@/components/event/CarbonAd.vue"
-import PubliftAd from "@/components/event/PubliftAd.vue"
 export default {
   name: "Event",
 
@@ -547,21 +457,17 @@ export default {
     SignUpForSlotDialog,
     ScheduleOverlap,
     NewDialog,
-    SignInNotSupportedDialog,
     MarkAvailabilityDialog,
     InvitationDialog,
     HelpDialog,
     EventDescription,
     FormerlyKnownAs,
-    CarbonAd,
-    PubliftAd,
   },
 
   data: () => ({
     fromEditEvent: false,
 
     choiceDialog: false,
-    webviewDialog: false,
     guestDialog: false,
     signUpForSlotDialog: false,
     editEventDialog: false,
@@ -603,21 +509,11 @@ export default {
     if (this.linkApple) {
       this.choiceDialog = true
     }
-    // window.enableStickyFooter = true
-    // this.initFusetag()
-    this.loadVideoAd()
   },
 
   computed: {
     ...mapState(["authUser", "events"]),
     ...mapGetters(["isPremiumUser"]),
-    showAds() {
-      return (
-        !this.ownerIsPremium &&
-        !this.isPremiumUser &&
-        !this.isSettingSpecificTimes
-      )
-    },
     allowScheduleEvent() {
       return this.scheduleOverlapComponent?.allowScheduleEvent
     },
@@ -701,36 +597,6 @@ export default {
   methods: {
     ...mapActions(["showError", "showInfo", "getEvents"]),
     ...mapMutations(["setAuthUser"]),
-
-    loadVideoAd() {
-      if (!this.isPhone && this.showAds && this.$refs.videoAdContainer) {
-        const script = document.createElement("script")
-        script.type = "text/javascript"
-        script.src =
-          "https://live.primis.tech/live/liveView.php?s=122130&schain=1.0,1!publift.com,01KF27H3XMWD7H1S0HYBGVB3BR,1"
-        this.$refs.videoAdContainer.appendChild(script)
-      }
-    },
-
-    initFusetag() {
-      console.log("initFusetag called, blockingFuseIds: ", [
-        "meet_vrec_lhs",
-        "meet_vrec_rhs",
-        "meet_incontent",
-        "meet_incontent_md",
-      ])
-      const fusetag = window.fusetag || (window.fusetag = { que: [] })
-      fusetag.que.push(function () {
-        fusetag.pageInit({
-          blockingFuseIds: [
-            "meet_vrec_lhs",
-            "meet_vrec_rhs",
-            "meet_incontent",
-            "meet_incontent_md",
-          ],
-        })
-      })
-    },
 
     /** Show choice dialog if not signed in, otherwise, immediately start editing availability */
     addAvailability() {
@@ -845,46 +711,6 @@ export default {
       this.ownerPremiumChecked = true
     },
 
-    setAvailabilityAutomatically(calendarType = calendarTypes.GOOGLE) {
-      /* Prompts user to sign in when "set availability automatically" button clicked */
-      if (isWebview(navigator.userAgent)) {
-        // Show dialog prompting user to use a real browser
-        this.webviewDialog = true
-      } else {
-        // Or sign in if user is already using a real browser
-        let signInParams
-        if (this.authUser) {
-          // Request permission if calendar permissions not yet granted
-          signInParams = {
-            state: {
-              type: this.isGroup
-                ? authTypes.GROUP_ADD_AVAILABILITY
-                : authTypes.EVENT_ADD_AVAILABILITY,
-              eventId: this.eventId,
-            },
-            selectAccount: false,
-            requestCalendarPermission: true,
-          }
-        } else {
-          // Ask the user to select the account they want to sign in with if not logged in yet
-          signInParams = {
-            state: {
-              type: authTypes.EVENT_ADD_AVAILABILITY,
-              eventId: this.eventId,
-            },
-            selectAccount: true,
-            requestCalendarPermission: true,
-          }
-        }
-
-        if (calendarType === calendarTypes.GOOGLE) {
-          signInGoogle(signInParams)
-        } else if (calendarType === calendarTypes.OUTLOOK) {
-          signInOutlook(signInParams)
-        }
-      }
-      this.choiceDialog = false
-    },
     setAvailabilityManually() {
       /* Starts editing after "set availability manually" button clicked */
       if (!this.scheduleOverlapComponent) return
@@ -990,34 +816,6 @@ export default {
           }, 100)
         }, 100)
       }, 100)
-    },
-
-    /** Sign in with google to link apple calendar */
-    signInLinkApple() {
-      if (isWebview(navigator.userAgent)) {
-        // Show dialog prompting user to use a real browser
-        this.webviewDialog = true
-      } else {
-        signInGoogle({
-          state: {
-            type: authTypes.EVENT_SIGN_IN_LINK_APPLE,
-            eventId: this.eventId,
-          },
-          selectAccount: true,
-        })
-      }
-    },
-    /** Called when user adds apple calendar account */
-    addedAppleCalendar() {
-      this.choiceDialog = false
-      this.scheduleOverlapComponent?.startEditing()
-      this.scheduleOverlapComponent?.setAvailabilityAutomatically()
-    },
-    /** Called when user adds ICS calendar account */
-    addedICSCalendar() {
-      this.choiceDialog = false
-      this.scheduleOverlapComponent?.startEditing()
-      this.scheduleOverlapComponent?.setAvailabilityAutomatically()
     },
 
     /** Refresh calendar availabilities of everybody in the group */
@@ -1923,12 +1721,6 @@ export default {
           this.scheduleOverlapComponent = this.$refs.scheduleOverlap
         })
         document.title = `${this.event.name} - Timeful`
-      }
-    },
-    ownerPremiumChecked(val) {
-      if (this.showAds) {
-        window.enableStickyFooter = true
-        this.initFusetag()
       }
     },
     scheduleOverlapComponent() {

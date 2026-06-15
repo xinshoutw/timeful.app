@@ -107,11 +107,13 @@ func VerifyGoogleIdToken(idToken string, allowedAuds []string) (GoogleIdTokenInf
 }
 
 // Returns access, refresh, and id tokens from the auth code
-func GetTokensFromAuthCode(code string, scope string, origin string, calendarType models.CalendarType) TokenResponse {
+func GetTokensFromAuthCode(code string, scope string, origin string, calendarType models.CalendarType) (TokenResponse, error) {
 	clientId, clientSecret := getCredentialsFromCalendarType(calendarType)
+	if clientId == "" || clientSecret == "" {
+		return TokenResponse{}, fmt.Errorf("OAuth credentials not configured for calendar type %s", calendarType)
+	}
 	tokenEndpoint := getTokenEndpointFromCalendarType(calendarType)
 
-	// Call Google oauth token endpoint
 	redirectUri := fmt.Sprintf("%s/auth", origin)
 	values := url.Values{
 		"client_id":     {clientId},
@@ -126,7 +128,7 @@ func GetTokensFromAuthCode(code string, scope string, origin string, calendarTyp
 		values,
 	)
 	if err != nil {
-		logger.StdErr.Panicln(err)
+		return TokenResponse{}, fmt.Errorf("failed to exchange auth code: %w", err)
 	}
 	defer resp.Body.Close()
 
@@ -134,11 +136,10 @@ func GetTokensFromAuthCode(code string, scope string, origin string, calendarTyp
 
 	json.NewDecoder(resp.Body).Decode(&res)
 	if len(res.Error) > 0 {
-		data, _ := json.MarshalIndent(res, "", "  ")
-		logger.StdErr.Panicln(string(data))
+		return TokenResponse{}, fmt.Errorf("token exchange error: %s (%s)", res.Error, res.ErrorDescription)
 	}
 
-	return res
+	return res, nil
 }
 
 func RefreshAccessToken(accountAuth *models.OAuth2CalendarAuth, calendarType models.CalendarType) AccessTokenResponse {

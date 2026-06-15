@@ -257,13 +257,6 @@
 
     <Footer />
 
-    <!-- Sign in dialog -->
-    <SignInDialog
-      v-model="signInDialog"
-      @signIn="_signIn"
-      @emailSignIn="_emailSignIn"
-    />
-
     <!-- New event dialog -->
     <NewDialog v-model="newDialog" no-tabs @signIn="signIn" />
 
@@ -291,7 +284,7 @@
 
 <script>
 import LandingPageCalendar from "@/components/landing/LandingPageCalendar.vue"
-import { isPhone, signInGoogle, signInOutlook } from "@/utils"
+import { isPhone } from "@/utils"
 import FAQ from "@/components/FAQ.vue"
 import Header from "@/components/Header.vue"
 import NumberBullet from "@/components/NumberBullet.vue"
@@ -300,13 +293,11 @@ import NewDialog from "@/components/NewDialog.vue"
 import LandingPageHeader from "@/components/landing/LandingPageHeader.vue"
 import Logo from "@/components/Logo.vue"
 import GithubButton from "vue-github-button"
-import SignInDialog from "@/components/SignInDialog.vue"
-import { calendarTypes } from "@/constants"
 import HowItWorksDialog from "@/components/HowItWorksDialog.vue"
 import { vueVimeoPlayer } from "vue-vimeo-player"
 import Footer from "@/components/Footer.vue"
 import PronunciationMenu from "@/components/PronunciationMenu.vue"
-import { mapState, mapMutations } from "vuex"
+import { mapState } from "vuex"
 import AuthUserMenu from "@/components/AuthUserMenu.vue"
 import FormerlyKnownAs from "@/components/FormerlyKnownAs.vue"
 
@@ -327,7 +318,6 @@ export default {
     LandingPageHeader,
     GithubButton,
     Logo,
-    SignInDialog,
     HowItWorksDialog,
     vueVimeoPlayer,
     Footer,
@@ -337,7 +327,6 @@ export default {
   },
 
   data: () => ({
-    signInDialog: false,
     newDialog: false,
     githubSnackbar: true,
     howItWorksSteps: [
@@ -458,7 +447,6 @@ export default {
   },
 
   methods: {
-    ...mapMutations(["setAuthUser"]),
     loadRiveAnimation() {
       // if (!this.rive) {
       //   this.rive = new Rive({
@@ -479,23 +467,6 @@ export default {
       // } else {
       //   this.rive.play("wave")
       // }
-    },
-    _signIn(calendarType) {
-      if (calendarType === calendarTypes.GOOGLE) {
-        signInGoogle({ state: null, selectAccount: true })
-      } else if (calendarType === calendarTypes.OUTLOOK) {
-        // NOTE: selectAccount is not supported implemented yet for Outlook, maybe add it later
-        signInOutlook({ state: null, selectAccount: true })
-      }
-    },
-    _emailSignIn(user) {
-      this.setAuthUser(user)
-      this.$posthog?.identify(user._id, {
-        email: user.email,
-        firstName: user.firstName,
-        lastName: user.lastName,
-      })
-      this.$router.replace({ name: "home" })
     },
     signIn() {
       this.$router.push({ name: "sign-in" })

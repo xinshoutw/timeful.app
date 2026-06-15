@@ -3,10 +3,8 @@
     <DiscordBanner />
     <AutoSnackbar color="error" :text="error" />
     <AutoSnackbar color="tw-bg-blue" :text="info" />
-    <SignInNotSupportedDialog v-model="webviewDialog" />
     <SignInDialog
       v-model="signInDialog"
-      @signIn="_signIn"
       @emailSignIn="_emailSignIn"
     />
     <NewDialog
@@ -235,23 +233,17 @@ import {
   getLocation,
   isPhone,
   post,
-  signInGoogle,
-  signInOutlook,
   isPremiumUser,
 } from "@/utils"
 import {
-  authTypes,
-  calendarTypes,
   eventTypes,
   numFreeEvents,
   upgradeDialogTypes,
 } from "@/constants"
 import AutoSnackbar from "@/components/AutoSnackbar"
 import AuthUserMenu from "@/components/AuthUserMenu.vue"
-import SignInNotSupportedDialog from "@/components/SignInNotSupportedDialog.vue"
 import UpvoteRedditSnackbar from "@/components/UpvoteRedditSnackbar.vue"
 import Logo from "@/components/Logo.vue"
-import isWebview from "is-ua-webview"
 import NewDialog from "./components/NewDialog.vue"
 import UpgradeDialog from "@/components/pricing/UpgradeDialog.vue"
 import SignInDialog from "@/components/SignInDialog.vue"
@@ -269,7 +261,6 @@ export default {
   components: {
     AutoSnackbar,
     AuthUserMenu,
-    SignInNotSupportedDialog,
     NewDialog,
     UpvoteRedditSnackbar,
     Logo,
@@ -282,7 +273,6 @@ export default {
     mounted: false,
     loaded: false,
     scrollY: 0,
-    webviewDialog: false,
     signInDialog: false,
   }),
 
@@ -348,51 +338,7 @@ export default {
       this.createNew({ eventOnly })
     },
     signIn() {
-      if (
-        this.$route.name === "event" ||
-        this.$route.name === "group" ||
-        this.$route.name === "signUp"
-      ) {
-        if (isWebview(navigator.userAgent)) {
-          this.webviewDialog = true
-          return
-        }
-        this.$router.push({ name: "sign-in" })
-        // this.signInDialog = true
-      } else {
-        this.$router.push({ name: "sign-in" })
-      }
-    },
-    _signIn(calendarType) {
-      if (
-        this.$route.name === "event" ||
-        this.$route.name === "group" ||
-        this.$route.name === "signUp"
-      ) {
-        let state
-        if (this.$route.name === "event") {
-          state = {
-            eventId: this.$route.params.eventId,
-            type: authTypes.EVENT_SIGN_IN,
-          }
-        } else if (this.$route.name === "group") {
-          state = {
-            groupId: this.$route.params.groupId,
-            type: authTypes.GROUP_SIGN_IN,
-          }
-        }
-        if (calendarType === calendarTypes.GOOGLE) {
-          signInGoogle({
-            state,
-            selectAccount: true,
-          })
-        } else if (calendarType === calendarTypes.OUTLOOK) {
-          signInOutlook({
-            state,
-            selectAccount: true,
-          })
-        }
-      }
+      this.$router.push({ name: "sign-in" })
     },
     _emailSignIn(user) {
       this.setAuthUser(user)
