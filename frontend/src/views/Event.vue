@@ -5,11 +5,6 @@
     />
     <div v-if="event" class="tw-mt-8 tw-h-full">
       <!-- Mark availability option dialog -->
-      <MarkAvailabilityDialog
-        v-model="choiceDialog"
-        @setAvailabilityManually="setAvailabilityManually"
-      />
-
       <!-- Guest dialog -->
       <GuestDialog
         v-model="guestDialog"
@@ -435,7 +430,6 @@ import {
   allTimezones,
   guestUserId,
 } from "@/constants"
-import MarkAvailabilityDialog from "@/components/calendar_permission_dialogs/MarkAvailabilityDialog.vue"
 import InvitationDialog from "@/components/groups/InvitationDialog.vue"
 import HelpDialog from "@/components/HelpDialog.vue"
 import EventDescription from "@/components/event/EventDescription.vue"
@@ -457,7 +451,6 @@ export default {
     SignUpForSlotDialog,
     ScheduleOverlap,
     NewDialog,
-    MarkAvailabilityDialog,
     InvitationDialog,
     HelpDialog,
     EventDescription,
@@ -467,7 +460,6 @@ export default {
   data: () => ({
     fromEditEvent: false,
 
-    choiceDialog: false,
     guestDialog: false,
     signUpForSlotDialog: false,
     editEventDialog: false,
@@ -505,10 +497,6 @@ export default {
   mounted() {
     // If coming from enabling contacts, show the dialog. Checks if contactsPayload is not an Observer.
     this.editEventDialog = Object.keys(this.contactsPayload).length > 0
-    // If coming from signing in to link apple calendar, show the mark availability dialog
-    if (this.linkApple) {
-      this.choiceDialog = true
-    }
   },
 
   computed: {
@@ -598,28 +586,9 @@ export default {
     ...mapActions(["showError", "showInfo", "getEvents"]),
     ...mapMutations(["setAuthUser"]),
 
-    /** Show choice dialog if not signed in, otherwise, immediately start editing availability */
     addAvailability() {
       if (!this.scheduleOverlapComponent) return
-
-      // Start editing immediately if days only
-      if (this.event?.daysOnly) {
-        this.scheduleOverlapComponent.startEditing()
-        return
-      }
-
-      // Start editing if calendar permission granted or user has responded, otherwise show choice dialog
-      if (
-        (this.authUser && this.calendarPermissionGranted) ||
-        this.userHasResponded
-      ) {
-        this.scheduleOverlapComponent.startEditing()
-        if (!this.userHasResponded && !this.isSignUp) {
-          this.scheduleOverlapComponent.setAvailabilityAutomatically()
-        }
-      } else {
-        this.choiceDialog = true
-      }
+      this.scheduleOverlapComponent.startEditing()
     },
     /** Add guest availability while signed in */
     addAvailabilityAsGuest() {
@@ -711,15 +680,6 @@ export default {
       this.ownerPremiumChecked = true
     },
 
-    setAvailabilityManually() {
-      /* Starts editing after "set availability manually" button clicked */
-      if (!this.scheduleOverlapComponent) return
-
-      this.$nextTick(() => {
-        this.scheduleOverlapComponent.startEditing()
-      })
-      this.choiceDialog = false
-    },
     editGuestAvailability() {
       /* Edits the selected guest's availability */
       if (!this.scheduleOverlapComponent) return
