@@ -14,7 +14,7 @@
             <div v-if="authUser" class="tw-ml-2">
               <AuthUserMenu />
             </div>
-            <v-btn v-else text :to="{ name: 'sign-in' }">Sign in</v-btn>
+            <v-btn v-else text :to="{ name: 'sign-in' }">登入</v-btn>
           </LandingPageHeader>
         </div>
       </div>
@@ -27,33 +27,13 @@
             id="header"
             class="tw-mb-4 tw-text-center tw-text-2xl tw-font-medium sm:tw-text-4xl lg:tw-text-4xl xl:tw-text-5xl"
           >
-            <h1>Find a time to meet</h1>
+            <h1>找到彼此有空的時間</h1>
           </div>
 
           <div
             class="lg:tw-text-md tw-text-left tw-text-center tw-text-sm tw-text-very-dark-gray sm:tw-text-lg md:tw-text-lg xl:tw-text-lg"
           >
-            Coordinate group meetings without the back and forth.
-            <br class="tw-hidden sm:tw-block" />
-            Integrates with your
-            <v-tooltip
-              top
-              content-class="tw-bg-very-dark-gray tw-shadow-lg tw-opacity-100"
-            >
-              <template v-slot:activator="{ on, attrs }">
-                <span
-                  class="tw-cursor-pointer tw-border-b tw-border-dashed tw-border-dark-gray"
-                  v-bind="attrs"
-                  v-on="on"
-                  >calendar</span
-                >
-              </template>
-              <span
-                >Timeful allows you to autofill your availability from Google
-                Calendar,<br class="tw-hidden sm:tw-block" />
-                Outlook, Apple Calendar, or an ICS feed URL.</span
-              > </v-tooltip
-            >.
+            不用再「那天有空」，「那天沒空」了！
           </div>
         </div>
 
@@ -67,12 +47,6 @@
           >
             {{ authUser ? "Open dashboard" : "Create event" }}
           </v-btn>
-          <div
-            v-if="!authUser"
-            class="tw-text-center tw-text-xs tw-text-dark-gray sm:tw-text-sm"
-          >
-            It's free! No login required.
-          </div>
         </div>
         <div class="tw-relative tw-w-full">
           <!-- Green background -->
