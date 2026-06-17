@@ -139,20 +139,20 @@
                   solo
                   color="primary"
                 >
-                  <v-btn depressed v-show="!startOnMonday"> Sun </v-btn>
-                  <v-btn depressed> Mon </v-btn>
-                  <v-btn depressed> Tue </v-btn>
-                  <v-btn depressed> Wed </v-btn>
-                  <v-btn depressed> Thu </v-btn>
-                  <v-btn depressed> Fri </v-btn>
-                  <v-btn depressed> Sat </v-btn>
-                  <v-btn depressed v-show="startOnMonday"> Sun </v-btn>
+                  <v-btn depressed v-show="!startOnMonday"> 日 </v-btn>
+                  <v-btn depressed> 一 </v-btn>
+                  <v-btn depressed> 二 </v-btn>
+                  <v-btn depressed> 三 </v-btn>
+                  <v-btn depressed> 四 </v-btn>
+                  <v-btn depressed> 五 </v-btn>
+                  <v-btn depressed> 六 </v-btn>
+                  <v-btn depressed v-show="startOnMonday"> 日 </v-btn>
                 </v-btn-toggle>
               </v-input>
               <v-checkbox class="tw-mt-2" v-model="startOnMonday" hide-details>
                 <template v-slot:label>
                   <span class="tw-text-sm tw-text-very-dark-gray">
-                    Start on Monday
+                    第一天為星期一
                   </span>
                 </template>
               </v-checkbox>

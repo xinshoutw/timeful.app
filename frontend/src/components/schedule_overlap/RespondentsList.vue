@@ -6,7 +6,7 @@
       </template>
       <template v-else>
         <div class="tw-mr-1 tw-text-lg">
-          {{ !isGroup ? "Responses" : "Members" }}
+          {{ !isGroup ? "回覆者" : "成員" }}
         </div>
         <div class="tw-font-normal">
           <template v-if="curRespondents.length === 0">
@@ -41,13 +41,13 @@
                     v-bind="attrs"
                     @click="trackExportCsvClick"
                   >
-                    <v-list-item-title>Export CSV</v-list-item-title>
+                    <v-list-item-title>匯出為 CSV</v-list-item-title>
                   </v-list-item>
                 </template>
                 <v-card>
-                  <v-card-title>Export CSV</v-card-title>
+                  <v-card-title>匯出為 CSV</v-card-title>
                   <v-card-text>
-                    <div class="tw-mb-1">Select CSV format:</div>
+                    <div class="tw-mb-1">選擇 CSV 格式</div>
                     <v-select
                       v-model="exportCsvDialog.type"
                       solo
@@ -63,14 +63,14 @@
                       text
                       @click="exportCsvDialog.visible = false"
                       :disabled="exportCsvDialog.loading"
-                      >Cancel</v-btn
+                      >取消</v-btn
                     >
                     <v-btn
                       text
                       @click="exportCsv"
                       color="primary"
                       :loading="exportCsvDialog.loading"
-                      >Export</v-btn
+                      >匯出</v-btn
                     >
                   </v-card-actions>
                 </v-card>
@@ -120,9 +120,9 @@
             class="tw-text-very-dark-gray"
             v-if="!isOwner && event.blindAvailabilityEnabled"
           >
-            No response yet!
+            目前還沒有人回覆！
           </span>
-          <span class="tw-text-very-dark-gray" v-else>No responses yet!</span>
+          <span class="tw-text-very-dark-gray" v-else>目前還沒有人回覆！</span>
         </div>
         <template v-else>
           <transition-group
@@ -206,7 +206,7 @@
                           <v-icon small class="tw-mr-2" color="#4F4F4F"
                             >mdi-pencil</v-icon
                           >
-                          Edit
+                          編輯
                         </v-list-item-title>
                       </v-list-item>
                       <v-list-item
@@ -217,7 +217,7 @@
                           <v-icon small class="tw-mr-2" color="#4F4F4F"
                             >mdi-delete</v-icon
                           >
-                          Delete
+                          刪除
                         </v-list-item-title>
                       </v-list-item>
                     </v-list>
@@ -319,7 +319,7 @@
         >
           <template v-slot:label>
             <div class="tw-text-sm tw-text-black">
-              Show best {{ event.daysOnly ? "days" : "times" }}
+              顯示最佳 {{ event.daysOnly ? "天數" : "時段" }}
             </div>
           </template>
         </v-switch>
@@ -362,7 +362,7 @@
         >
         <v-card-actions>
           <v-spacer />
-          <v-btn text @click="deleteAvailabilityDialog = false">Cancel</v-btn>
+          <v-btn text @click="deleteAvailabilityDialog = false">取消</v-btn>
           <v-btn
             text
             color="error"
@@ -372,7 +372,7 @@
                 deleteAvailabilityDialog = false
               }
             "
-            >Delete</v-btn
+            >刪除</v-btn
           >
         </v-card-actions>
       </v-card>

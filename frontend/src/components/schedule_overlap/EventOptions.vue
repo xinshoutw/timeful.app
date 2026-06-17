@@ -16,7 +16,7 @@
       >
         <template v-slot:label>
           <div class="tw-text-sm tw-text-black">
-            Show best {{ event.daysOnly ? "days" : "times" }}
+            顯示最佳 {{ event.daysOnly ? "天數" : "時段" }}
           </div>
         </template>
       </v-switch>
@@ -30,7 +30,7 @@
       >
         <template v-slot:label>
           <div class="tw-text-sm tw-text-black">
-            Hide if needed {{ event.daysOnly ? "days" : "times" }}
+            隱藏〔如果有需要〕的 {{ event.daysOnly ? "天數" : "時段" }}
           </div>
         </template>
       </v-switch>
@@ -56,7 +56,7 @@
         hide-details
       >
         <template v-slot:label>
-          <div class="tw-text-sm tw-text-black">Start on Monday</div>
+          <div class="tw-text-sm tw-text-black">第一天為星期一</div>
         </template>
       </v-switch>
     </div>

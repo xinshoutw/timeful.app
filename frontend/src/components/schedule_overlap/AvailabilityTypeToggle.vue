@@ -23,14 +23,14 @@ export default {
     return {
       options: [
         {
-          text: "Available",
+          text: "有空",
           activeClass: "tw-text-green tw-bg-green/5",
           borderClass: "tw-border-green",
           borderStyle: { boxShadow: "0px 2px 8px 0px #00994C40" },
           value: availabilityTypes.AVAILABLE,
         },
         {
-          text: "If needed",
+          text: "如果有需要",
           activeClass: "tw-text-dark-yellow tw-bg-yellow/5",
           borderClass: "tw-border-orange",
           borderStyle: { boxShadow: "0px 2px 8px 0px #FEDB9340" },

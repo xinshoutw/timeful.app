@@ -53,7 +53,7 @@ export default {
 
   props: {
     value: { type: Object, required: true },
-    label: { type: String, default: "Shown in" },
+    label: { type: String, default: "顯示時區" },
     labelColor: { type: String, default: "" },
     referenceDate: { type: Date, default: null },
   },

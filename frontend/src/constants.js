@@ -159,7 +159,7 @@ export const allTimezones = Object.freeze({
   "Asia/Krasnoyarsk": "Krasnoyarsk",
   "Asia/Shanghai": "Beijing, Chongqing, Hong Kong SAR, Urumqi",
   "Asia/Kuala_Lumpur": "Kuala Lumpur, Singapore",
-  "Asia/Taipei": "Taipei",
+  "Asia/Taipei": "臺灣",
   "Australia/Perth": "Perth",
   "Asia/Irkutsk": "Irkutsk, Ulaanbaatar",
   "Asia/Seoul": "Seoul",

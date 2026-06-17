@@ -485,8 +485,7 @@
                     "
                   >
                     <div class="tw-mt-2 tw-text-sm tw-text-dark-gray">
-                      Note: There's no time when all
-                      {{ respondents.length }} respondents are available.
+                      提示: 目前沒有 {{ respondents.length }} 人都有空的時間...
                     </div>
                   </div>
                 </v-expand-transition>
@@ -593,13 +592,14 @@
                   "
                   class="tw-flex tw-flex-wrap tw-items-baseline tw-gap-1 tw-text-sm tw-italic tw-text-dark-gray"
                 >
+                  正在
                   {{
                     (userHasResponded && !addingAvailabilityAsGuest) ||
                     curGuestId
-                      ? "Editing"
-                      : "Adding"
+                      ? "編輯"
+                      : "新增"
                   }}
-                  availability as
+                  空檔：
                   <div
                     v-if="curGuestId && canEditGuestName"
                     class="tw-group tw-mt-0.5 tw-flex tw-w-fit tw-cursor-pointer tw-items-center tw-gap-1"
@@ -616,7 +616,7 @@
                         ? `${authUser.firstName} ${authUser.lastName}`
                         : curGuestId?.length > 0
                         ? curGuestId
-                        : "a guest"
+                        : "未命名使用者"
                     }}
                   </span>
                   <v-dialog
@@ -625,11 +625,11 @@
                     content-class="tw-m-0"
                   >
                     <v-card>
-                      <v-card-title>Edit guest name</v-card-title>
+                      <v-card-title>編輯名稱</v-card-title>
                       <v-card-text>
                         <v-text-field
                           v-model="newGuestName"
-                          label="Guest name"
+                          label="名稱"
                           autofocus
                           @keydown.enter="saveGuestName"
                           hide-details
@@ -638,10 +638,10 @@
                       <v-card-actions>
                         <v-spacer />
                         <v-btn text @click="editGuestNameDialog = false"
-                          >Cancel</v-btn
+                          >取消</v-btn
                         >
                         <v-btn text color="primary" @click="saveGuestName"
-                          >Save</v-btn
+                          >儲存</v-btn
                         >
                       </v-card-actions>
                     </v-card>
@@ -683,13 +683,13 @@
                   >
                     <template v-slot:label>
                       <div class="tw-text-sm tw-text-black">
-                        Overlay availabilities
+                        預覽所有空檔
                       </div>
                     </template>
                   </v-switch>
 
                   <div class="tw-mt-2 tw-text-xs tw-text-dark-gray">
-                    View everyone's availability while inputting your own
+                    查看大家有空的時間。在確定沒空之前，也可以試著看看〔如果有需要〕這個標籤喔！
                   </div>
                 </div>
 
@@ -771,24 +771,24 @@
                         v-on="on"
                         class="tw-cursor-pointer tw-text-sm tw-text-red"
                       >
-                        {{ !isGroup ? "Delete availability" : "Leave group" }}
+                        {{ !isGroup ? "刪除空檔紀錄" : "離開群組" }}
                       </span>
                     </template>
 
                     <v-card>
-                      <v-card-title>Are you sure?</v-card-title>
+                      <v-card-title>確定嗎？</v-card-title>
                       <v-card-text class="tw-text-sm tw-text-dark-gray"
-                        >Are you sure you want to
+                        >你確定要
                         {{
                           !isGroup
-                            ? "delete your availability from this event?"
-                            : "leave this group?"
+                            ? "刪除這個活動的空檔紀錄？"
+                            : "離開這個群組？"
                         }}</v-card-text
                       >
                       <v-card-actions>
                         <v-spacer />
                         <v-btn text @click="deleteAvailabilityDialog = false"
-                          >Cancel</v-btn
+                          >取消</v-btn
                         >
                         <v-btn
                           text
@@ -797,7 +797,7 @@
                             $emit('deleteAvailability')
                             deleteAvailabilityDialog = false
                           "
-                          >{{ !isGroup ? "Delete" : "Leave" }}</v-btn
+                          >{{ !isGroup ? "刪除" : "離開" }}</v-btn
                         >
                       </v-card-actions>
                     </v-card>
@@ -2047,11 +2047,10 @@ export default {
           case this.isGroup && this.states.EDIT_AVAILABILITY:
             return "Toggle which calendars are used. Tap and drag to edit your availability."
           case this.states.EDIT_AVAILABILITY:
-            const daysOrTimes = this.event.daysOnly ? "days" : "times"
             if (this.availabilityType === availabilityTypes.IF_NEEDED) {
-              return `Tap and drag to add your "if needed" ${daysOrTimes} in yellow.`
+              return `輕觸或拖曳來標記「如果有需要」的時段`
             }
-            return `Tap and drag to add your "available" ${daysOrTimes} in green.`
+            return `輕觸或拖曳來標記「有空」的時段`
           case this.states.SCHEDULE_EVENT:
             return "Tap and drag on the calendar to schedule a Google Calendar event during those times."
           default:
@@ -2063,11 +2062,11 @@ export default {
         case this.isGroup && this.states.EDIT_AVAILABILITY:
           return "Toggle which calendars are used. Click and drag to edit your availability."
         case this.states.EDIT_AVAILABILITY:
-          const daysOrTimes = this.event.daysOnly ? "days" : "times"
+          // const daysOrTimes = this.event.daysOnly ? "days" : "times"
           if (this.availabilityType === availabilityTypes.IF_NEEDED) {
-            return `Click and drag to add your "if needed" ${daysOrTimes} in yellow.`
+            return `點擊或拖曳來標記「如果有需要」的時段`
           }
-          return `Click and drag to add your "available" ${daysOrTimes} in green.`
+          return `點擊或拖曳來標記「有空」的時段`
         case this.states.SCHEDULE_EVENT:
           return "Click and drag on the calendar to schedule a Google Calendar event during those times."
         default:

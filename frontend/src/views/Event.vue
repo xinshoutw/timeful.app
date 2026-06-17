@@ -133,7 +133,7 @@
                       class="tw-px-2 tw-text-sm tw-text-green"
                       text
                     >
-                      Edit {{ isGroup ? "group" : "event" }}
+                      編輯 {{ isGroup ? "群組" : "活動" }}
                     </v-btn>
                   </template>
                 </div>
@@ -161,7 +161,7 @@
                     :loading="loading"
                   >
                     <v-icon class="tw-mr-1" v-if="!isPhone">mdi-refresh</v-icon>
-                    <span v-if="!isPhone" class="tw-mr-2">Refresh</span>
+                    <span v-if="!isPhone" class="tw-mr-2">重新整理</span>
                     <v-icon class="tw-text-green" v-else>mdi-refresh</v-icon>
                   </v-btn>
                 </div>
@@ -173,7 +173,7 @@
                     @click="copyLink"
                   >
                     <span v-if="!isPhone" class="tw-mr-2 tw-text-green"
-                      >Copy link</span
+                      >複製連結</span
                     >
                     <v-icon class="tw-text-green" v-if="!isPhone"
                       >mdi-content-copy</v-icon
@@ -195,8 +195,8 @@
                     >
                       {{
                         event.blindAvailabilityEnabled
-                          ? "Edit availability"
-                          : `Edit ${selectedGuestRespondent}'s availability`
+                          ? "編輯空檔"
+                          : `編輯 ${selectedGuestRespondent} 的空檔`
                       }}
                     </v-btn>
                     <v-btn
@@ -217,14 +217,14 @@
                       @click="cancelEditing"
                       outlined
                     >
-                      Cancel
+                      取消
                     </v-btn>
                     <v-btn
                       class="tw-w-20 tw-text-white"
                       :class="'tw-bg-green'"
                       @click="() => saveChanges()"
                     >
-                      Save
+                      儲存
                     </v-btn></template
                   >
                 </div>
@@ -263,41 +263,6 @@
           />
         </div>
       </div>
-
-      <template v-if="showFeedbackBtn">
-        <div class="tw-w-full tw-border-t tw-border-solid tw-border-gray"></div>
-
-        <div class="tw-flex tw-flex-col tw-items-center" v-if="showFeedbackBtn">
-          <v-btn
-            class="tw-h-16"
-            block
-            id="feedback-btn"
-            text
-            href="https://forms.gle/A96i4TTWeKgH3P1W6"
-            target="_blank"
-          >
-            Give feedback to Timeful team
-          </v-btn>
-          <!-- <div
-            class="tw-w-full tw-border-t tw-border-solid tw-border-gray"
-          ></div> -->
-          <!-- <v-btn
-            class="tw-h-16"
-            block
-            text
-            href="https://www.paypal.com/donate/?hosted_button_id=KWCH6LGJCP6E6"
-            target="_blank"
-          >
-            Donate
-          </v-btn> -->
-          <div
-            class="tw-w-full tw-border-t tw-border-solid tw-border-gray"
-          ></div>
-          <v-btn class="tw-h-16" block text :to="{ name: 'privacy-policy' }">
-            Privacy Policy
-          </v-btn>
-        </div>
-      </template>
 
       <div
         class="tw-mb-16 tw-hidden tw-flex-col tw-items-center tw-justify-between sm:tw-flex"
@@ -351,19 +316,19 @@
           </template>
           <template v-else-if="isEditing">
             <v-btn text class="tw-text-white" @click="cancelEditing">
-              Cancel
+              取消
             </v-btn>
             <v-spacer />
             <v-btn
               class="tw-bg-white tw-text-green"
               @click="() => saveChanges()"
             >
-              Save
+              儲存
             </v-btn>
           </template>
           <template v-else-if="isScheduling">
             <v-btn text class="tw-text-white" @click="cancelScheduleEvent">
-              Cancel
+              取消
             </v-btn>
             <v-spacer />
             <v-btn
@@ -546,25 +511,22 @@ export default {
     selectedGuestRespondent() {
       return this.scheduleOverlapComponent?.selectedGuestRespondent
     },
-    showFeedbackBtn() {
-      return this.isPhone
-    },
     numResponses() {
       return this.scheduleOverlapComponent?.respondents.length
     },
     actionButtonText() {
       if (this.isSignUp) return "Edit slots"
-      else if (this.userHasResponded || this.isGroup) return "Edit availability"
-      return "Add availability"
+      else if (this.userHasResponded || this.isGroup) return "編輯空檔"
+      return "新增空檔"
     },
     mobileGuestActionButtonText() {
       return this.event.blindAvailabilityEnabled
-        ? "Edit availability"
-        : `Edit ${this.selectedGuestRespondent}'s availability`
+        ? "編輯空檔"
+        : `編輯 ${this.selectedGuestRespondent} 的空檔`
     },
     mobileActionButtonText() {
       if (this.isSignUp) return "Edit slots"
-      return this.userHasResponded ? "Edit availability" : "Add availability"
+      return this.userHasResponded ? "編輯空檔" : "新增空檔"
     },
     isIOS() {
       return isIOS()

@@ -76,7 +76,7 @@ export const getDateRangeStringForEvent = (event) => {
   if (event.type === eventTypes.DOW || event.type === eventTypes.GROUP) {
     let s = ""
 
-    const dayAbbreviations = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    const dayAbbreviations = ["日", "一", "二", "三", "四", "五", "六"]
     for (let date of event.dates) {
       date = getDateWithTimezone(date)
 

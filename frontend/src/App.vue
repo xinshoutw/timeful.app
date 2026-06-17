@@ -45,26 +45,8 @@
           text
           @click="() => _createNew(true)"
         >
-          Create an event
+          建立新活動
         </v-btn>
-        <v-btn
-          v-if="showFeedbackBtn"
-          id="feedback-btn"
-          text
-          href="https://forms.gle/A96i4TTWeKgH3P1W6"
-          target="_blank"
-          @click="trackFeedbackClick"
-        >
-          Give feedback
-        </v-btn>
-        <!-- <v-btn
-          v-if="!isPhone"
-          text
-          href="https://www.paypal.com/donate/?hosted_button_id=KWCH6LGJCP6E6"
-          target="_blank"
-        >
-          Donate
-        </v-btn> -->
         <v-btn
           v-if="$route.name === 'home' && !isPhone"
           color="primary"
@@ -292,9 +274,6 @@ export default {
         this.$route.name !== "privacy-policy"
       )
     },
-    showFeedbackBtn() {
-      return !this.isPhone || this.$route.name === "home"
-    },
     routerViewClass() {
       let c = ""
       if (this.showHeader) {
@@ -355,9 +334,6 @@ export default {
       // )
       // this.setEnablePaywall(this.$posthog.isFeatureEnabled("enable-paywall"))
       this.setFeatureFlagsLoaded(true)
-    },
-    trackFeedbackClick() {
-      this.$posthog.capture("give_feedback_button_clicked")
     },
     handleUpgradeDialogInput(value) {
       if (!value) {
