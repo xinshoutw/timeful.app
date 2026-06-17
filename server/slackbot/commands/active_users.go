@@ -126,7 +126,7 @@ var activeUsers Command = Command{
 		}
 
 		// Define constants
-		dayStrings := []string{"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"}
+		dayStrings := []string{"日", "一", "二", "三", "四", "五", "六"}
 
 		if list {
 			// Display a list of all active users

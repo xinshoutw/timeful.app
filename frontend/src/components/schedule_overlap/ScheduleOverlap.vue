@@ -51,7 +51,7 @@
                     <div
                       v-for="(day, i) in monthDays"
                       :key="day.time"
-                      class="timeslot tw-aspect-square tw-flex tw-items-center tw-justify-center tw-text-sm sm:tw-text-base"
+                      class="timeslot tw-flex tw-aspect-square tw-items-center tw-justify-center tw-text-sm sm:tw-text-base"
                       :class="dayTimeslotClassStyle[i].class"
                       :style="dayTimeslotClassStyle[i].style"
                       v-on="dayTimeslotVon[i]"
@@ -485,7 +485,7 @@
                     "
                   >
                     <div class="tw-mt-2 tw-text-sm tw-text-dark-gray">
-                      提示: 目前沒有 {{ respondents.length }} 人都有空的時間...
+                      目前沒有 {{ respondents.length }} 人都有空的時間...
                     </div>
                   </div>
                 </v-expand-transition>
@@ -592,14 +592,12 @@
                   "
                   class="tw-flex tw-flex-wrap tw-items-baseline tw-gap-1 tw-text-sm tw-italic tw-text-dark-gray"
                 >
-                  正在
                   {{
                     (userHasResponded && !addingAvailabilityAsGuest) ||
                     curGuestId
-                      ? "編輯"
-                      : "新增"
+                      ? "正在編輯空檔："
+                      : "正在新增空檔："
                   }}
-                  空檔：
                   <div
                     v-if="curGuestId && canEditGuestName"
                     class="tw-group tw-mt-0.5 tw-flex tw-w-fit tw-cursor-pointer tw-items-center tw-gap-1"
@@ -682,9 +680,7 @@
                     hide-details
                   >
                     <template v-slot:label>
-                      <div class="tw-text-sm tw-text-black">
-                        預覽所有空檔
-                      </div>
+                      <div class="tw-text-sm tw-text-black">預覽所有空檔</div>
                     </template>
                   </v-switch>
 
@@ -778,11 +774,11 @@
                     <v-card>
                       <v-card-title>確定嗎？</v-card-title>
                       <v-card-text class="tw-text-sm tw-text-dark-gray"
-                        >你確定要
+                        >
                         {{
                           !isGroup
-                            ? "刪除這個活動的空檔紀錄？"
-                            : "離開這個群組？"
+                            ? "你確定要刪除這個活動的空檔紀錄？"
+                            : "你確定要離開這個群組？"
                         }}</v-card-text
                       >
                       <v-card-actions>

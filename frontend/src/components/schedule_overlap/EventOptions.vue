@@ -16,7 +16,7 @@
       >
         <template v-slot:label>
           <div class="tw-text-sm tw-text-black">
-            顯示最佳 {{ event.daysOnly ? "天數" : "時段" }}
+            顯示最佳{{ event.daysOnly ? "天數" : "時段" }}
           </div>
         </template>
       </v-switch>
@@ -30,7 +30,7 @@
       >
         <template v-slot:label>
           <div class="tw-text-sm tw-text-black">
-            隱藏〔如果有需要〕的 {{ event.daysOnly ? "天數" : "時段" }}
+            {{ event.daysOnly ? "隱藏如果有需要的天數" : "隱藏如果有需要的時段" }}
           </div>
         </template>
       </v-switch>

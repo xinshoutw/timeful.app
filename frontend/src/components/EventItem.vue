@@ -299,7 +299,7 @@ export default {
       navigator.clipboard.writeText(
         `${window.location.origin}/e/${this.event.shortId ?? this.event._id}`
       )
-      this.showInfo("Link copied to clipboard!")
+      this.showInfo("已複製連結到剪貼簿！")
       this.showMenu = false
     },
     isPhone() {

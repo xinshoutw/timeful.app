@@ -319,7 +319,7 @@
         >
           <template v-slot:label>
             <div class="tw-text-sm tw-text-black">
-              顯示最佳 {{ event.daysOnly ? "天數" : "時段" }}
+              顯示最佳{{ event.daysOnly ? "天數" : "時段" }}
             </div>
           </template>
         </v-switch>

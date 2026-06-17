@@ -133,7 +133,7 @@
                       class="tw-px-2 tw-text-sm tw-text-green"
                       text
                     >
-                      編輯 {{ isGroup ? "群組" : "活動" }}
+                      編輯{{ isGroup ? "群組" : "活動" }}
                     </v-btn>
                   </template>
                 </div>
@@ -568,7 +568,7 @@ export default {
       navigator.clipboard.writeText(
         `${window.location.origin}/e/${this.event.shortId ?? this.event._id}`
       )
-      this.showInfo("Link copied to clipboard!")
+      this.showInfo("已複製連結到剪貼簿！")
     },
     async deleteAvailability() {
       if (!this.scheduleOverlapComponent) return
