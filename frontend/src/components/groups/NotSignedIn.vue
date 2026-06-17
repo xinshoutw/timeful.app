@@ -11,17 +11,15 @@
           class="tw-mb-4 tw-text-center"
         />
         <h1 class="tw-mb-2 tw-text-center tw-text-xl tw-font-medium">
-          {{ owner.firstName ?? "" }} invited you to join <br />"{{
-            event.name
-          }}"
+          {{ owner.firstName ?? "" }} 邀請你加入<br />「{{ event.name }}」
         </h1>
         <div class="tw-text-center tw-text-dark-gray">
-          Join the group now to share your <br v-if="!isPhone" />
-          availability with each other!
+          立即加入群組，<br v-if="!isPhone" />
+          與彼此分享你有空的時間！
         </div>
       </div>
       <v-btn @click="signIn" color="primary" class="tw-mb-8">
-        Sign in to join
+        登入來加入
       </v-btn>
     </div>
   </v-fade-transition>

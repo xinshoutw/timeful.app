@@ -80,7 +80,7 @@
           <AuthUserMenu />
         </div>
         <v-btn v-else id="top-right-sign-in-btn" text @click="signIn">
-          Sign in
+          登入
         </v-btn>
       </div>
     </div>

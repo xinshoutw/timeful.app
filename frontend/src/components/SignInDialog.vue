@@ -8,15 +8,15 @@
     <v-card>
       <!-- Main sign-in screen -->
       <template v-if="step === 'select'">
-        <v-card-title>Sign in</v-card-title>
+        <v-card-title>登入</v-card-title>
         <v-card-text class="tw-flex tw-flex-col tw-items-center">
           <div class="tw-mb-4 tw-flex tw-w-full tw-flex-col tw-gap-y-2">
             <div>
-              <div class="tw-mb-1 tw-text-sm tw-font-medium">Email address</div>
+              <div class="tw-mb-1 tw-text-sm tw-font-medium">電子郵件</div>
               <v-text-field
                 v-model="email"
                 class="tw-mb-2"
-                placeholder="Enter your email..."
+                placeholder="輸入你的電子郵件..."
                 type="email"
                 solo
                 hide-details="auto"
@@ -30,14 +30,14 @@
                 :disabled="sending"
                 @click="submitEmail"
               >
-                Continue with Email
+                使用 Email 繼續
               </v-btn>
             </div>
           </div>
           <div class="tw-text-center tw-text-xs">
-            By continuing, you agree to our
+            繼續即表示你同意我們的
             <router-link class="tw-text-blue" :to="{ name: 'privacy-policy' }"
-              >privacy policy</router-link
+              >隱私權政策</router-link
             >
           </div>
         </v-card-text>
@@ -49,36 +49,36 @@
           <v-btn icon small @click="step = 'select'" class="tw-mr-1">
             <v-icon>mdi-arrow-left</v-icon>
           </v-btn>
-          What's your name?
+          你叫什麼名字？
         </v-card-title>
         <v-card-text>
           <p class="tw-text-gray-600 tw-mb-4 tw-text-sm">
-            We just need a couple details to set up your account.
+            我們只需要一些資訊來建立你的帳號
           </p>
-          <div class="tw-mb-1 tw-text-sm tw-font-medium">First name</div>
+          <div class="tw-mb-1 tw-text-sm tw-font-medium">名字</div>
           <v-text-field
             v-model="firstName"
-            placeholder="First name"
+            placeholder="名字"
             solo
             hide-details="auto"
             autofocus
             @keydown.enter="$refs.lastNameField && $refs.lastNameField.focus()"
             class="tw-mb-3"
           />
-          <div class="tw-mb-1 tw-text-sm tw-font-medium">Last name</div>
+          <div class="tw-mb-1 tw-text-sm tw-font-medium">姓氏</div>
           <v-text-field
             ref="lastNameField"
             v-model="lastName"
-            placeholder="Last name (optional)"
+            placeholder="姓氏（選填）"
             solo
             hide-details="auto"
             @keydown.enter="submitOnboarding"
             class="tw-mb-3"
           />
-          <div class="tw-mb-1 tw-text-sm tw-font-medium">Email</div>
+          <div class="tw-mb-1 tw-text-sm tw-font-medium">電子郵件</div>
           <v-text-field
             :value="email"
-            placeholder="Email..."
+            placeholder="電子郵件..."
             solo
             hide-details="auto"
             disabled
@@ -92,7 +92,7 @@
             :disabled="!firstName.trim() || sending"
             @click="submitOnboarding"
           >
-            Continue
+            繼續
           </v-btn>
         </v-card-text>
       </template>
@@ -108,17 +108,18 @@
           >
             <v-icon>mdi-arrow-left</v-icon>
           </v-btn>
-          Enter verification code
+          輸入驗證碼
         </v-card-title>
         <v-card-text>
           <p class="tw-text-gray-600 tw-mb-4 tw-text-sm">
-            Enter the 6-digit code sent to
+            請輸入已寄送至
             <strong>{{ email }}</strong>
+            的 6 位數驗證碼
           </p>
-          <div class="tw-mb-1 tw-text-sm tw-font-medium">Verification code</div>
+          <div class="tw-mb-1 tw-text-sm tw-font-medium">驗證碼</div>
           <v-text-field
             v-model="otpCode"
-            placeholder="Enter 6-digit code..."
+            placeholder="輸入 6 位數驗證碼..."
             solo
             hide-details="auto"
             maxlength="6"
@@ -134,7 +135,7 @@
             :disabled="otpCode.length !== 6 || verifying"
             @click="verifyOtp"
           >
-            Verify
+            驗證
           </v-btn>
           <div class="tw-mt-3 tw-text-center">
             <v-btn
@@ -145,8 +146,8 @@
             >
               {{
                 resendCooldown > 0
-                  ? `Resend code (${resendCooldown}s)`
-                  : "Resend code"
+                  ? `重新發送（${resendCooldown}s）`
+                  : "重新發送驗證碼"
               }}
             </v-btn>
           </div>
@@ -184,15 +185,15 @@ export default {
     validateEmail() {
       const email = this.email.trim()
       if (!email) {
-        this.emailError = "Please enter an email address."
+        this.emailError = "請輸入電子郵件地址"
         return false
       }
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        this.emailError = "Please enter a valid email address."
+        this.emailError = "請輸入有效的電子郵件地址"
         return false
       }
       if (email.includes("+")) {
-        this.emailError = "Email aliases with '+' are not allowed."
+        this.emailError = "不允許使用含有「+」的電子郵件別名"
         return false
       }
       return true
@@ -214,7 +215,7 @@ export default {
           this.otpError = ""
         }
       } catch (err) {
-        this.emailError = "Something went wrong. Please try again."
+        this.emailError = "發生錯誤，請再試一次"
       } finally {
         this.sending = false
       }
@@ -228,7 +229,7 @@ export default {
         this.otpCode = ""
         this.otpError = ""
       } catch (err) {
-        this.otpError = "Failed to send code. Please try again."
+        this.otpError = "驗證碼發送失敗，請再試一次"
       } finally {
         this.sending = false
       }
@@ -245,7 +246,7 @@ export default {
         this.otpCode = ""
         this.otpError = ""
       } catch (err) {
-        this.otpError = "Failed to resend code. Please try again."
+        this.otpError = "驗證碼重新發送失敗，請再試一次"
       } finally {
         this.sending = false
       }
@@ -271,11 +272,11 @@ export default {
       } catch (err) {
         const errorCode = err?.parsed?.error
         if (errorCode === "otp-expired") {
-          this.otpError = "Code has expired. Please request a new one."
+          this.otpError = "驗證碼已過期，請重新取得"
         } else if (errorCode === "otp-too-many-attempts") {
-          this.otpError = "Too many attempts. Please request a new code."
+          this.otpError = "嘗試次數過多，請重新取得驗證碼"
         } else {
-          this.otpError = "Invalid code. Please try again."
+          this.otpError = "驗證碼錯誤，請再試一次"
         }
       } finally {
         this.verifying = false

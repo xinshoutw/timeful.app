@@ -227,8 +227,8 @@
               class="tw-pointer-events-auto -tw-mt-1 tw-ml-[32px] tw-text-xs tw-text-dark-gray"
             >
               <span class="tw-font-medium tw-text-very-dark-gray"
-                ><a @click="$emit('signIn')">Sign in</a>
-                to use this feature
+                ><a @click="$emit('signIn')">登入</a>
+                來使用此功能
               </span>
             </div>
           </template>
@@ -328,8 +328,8 @@
                     class="tw-pointer-events-auto -tw-mt-1 tw-ml-[32px] tw-text-xs tw-text-dark-gray"
                   >
                     <span class="tw-font-medium tw-text-very-dark-gray"
-                      ><a @click="$emit('signIn')">Sign in</a>
-                      to use this feature
+                      ><a @click="$emit('signIn')">登入</a>
+                      來使用此功能
                     </span>
                   </div>
                 </template>
@@ -369,8 +369,8 @@
                   >
                     {{ message }}
                     <span class="tw-font-medium tw-text-very-dark-gray"
-                      ><a @click="$emit('signIn')">Sign in</a>
-                      to use this feature
+                      ><a @click="$emit('signIn')">登入</a>
+                      來使用此功能
                     </span>
                   </div>
                 </template>
@@ -707,7 +707,9 @@ export default {
             // corresponds to the user's current timezone offset.
             const refOffset = date.utcOffset()
             const currentOffset = dayjs().tz(this.timezone.value).utcOffset()
-            dates.push(date.subtract(currentOffset - refOffset, 'minutes').toDate())
+            dates.push(
+              date.subtract(currentOffset - refOffset, "minutes").toDate()
+            )
           }
         }
       }

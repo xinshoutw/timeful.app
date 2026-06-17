@@ -261,8 +261,8 @@
                   >
                     {{ message }}
                     <span class="tw-font-medium tw-text-very-dark-gray"
-                      ><a @click="$emit('signIn')">Sign in</a>
-                      to use this feature
+                      ><a @click="$emit('signIn')">登入</a>
+                      來使用此功能
                     </span>
                   </div>
                 </template>

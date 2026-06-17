@@ -43,9 +43,9 @@
           >
             *
             <a @click.stop="$emit('signIn')" class="tw-text-green tw-underline"
-              >Sign in</a
+              >登入</a
             >
-            to use this feature
+            來使用此功能
           </div>
         </div>
       </div>
