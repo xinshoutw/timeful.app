@@ -8,7 +8,6 @@ import (
 	"math/big"
 	"net/http"
 	"os"
-	"strconv"
 	"strings"
 	"time"
 
@@ -388,14 +387,12 @@ func sendOtp(c *gin.Context) {
 		logger.StdErr.Panicln(err)
 	}
 
-	otpTemplateId, err := strconv.Atoi(os.Getenv("LISTMONK_OTP_EMAIL_TEMPLATE_ID"))
-	if err != nil {
-		logger.StdErr.Panicln("LISTMONK_OTP_EMAIL_TEMPLATE_ID is not set or invalid")
-	}
-
-	listmonk.SendEmailAddSubscriberIfNotExist(email, otpTemplateId, bson.M{
-		"code": code,
-	}, false, "Timeful <noreply@timeful.app>")
+	subject := "Your Timeful verification code"
+	body := fmt.Sprintf(
+		"<h2>Your verification code</h2><p style=\"font-size:32px;font-weight:bold;letter-spacing:4px\">%s</p><p>This code expires in 10 minutes.</p>",
+		code,
+	)
+	go utils.SendEmail(email, subject, body, "text/html")
 
 	c.JSON(http.StatusOK, gin.H{})
 }

@@ -6,30 +6,51 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"strconv"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"gopkg.in/gomail.v2"
 	"schej.it/server/logger"
 )
 
-// Send email to the given email
 func SendEmail(toEmail string, subject string, body string, contentType string) {
 	if contentType == "" {
 		contentType = "text/plain"
 	}
 
-	appPassword := os.Getenv("GMAIL_APP_PASSWORD")
-	fromEmail := os.Getenv("SCHEJ_EMAIL_ADDRESS")
+	smtpHost := os.Getenv("SMTP_HOST")
+	smtpPortStr := os.Getenv("SMTP_PORT")
+	smtpUser := os.Getenv("SMTP_USERNAME")
+	smtpPass := os.Getenv("SMTP_PASSWORD")
+	fromAddr := os.Getenv("SMTP_FROM_ADDRESS")
+	fromName := os.Getenv("SMTP_FROM_NAME")
+
+	if smtpHost == "" {
+		smtpHost = "smtp.gmail.com"
+		smtpUser = os.Getenv("SCHEJ_EMAIL_ADDRESS")
+		smtpPass = os.Getenv("GMAIL_APP_PASSWORD")
+		fromAddr = smtpUser
+	}
+
+	smtpPort := 587
+	if smtpPortStr != "" {
+		if p, err := strconv.Atoi(smtpPortStr); err == nil {
+			smtpPort = p
+		}
+	}
 
 	m := gomail.NewMessage()
-	m.SetHeader("From", fromEmail)
+	if fromName != "" {
+		m.SetHeader("From", m.FormatAddress(fromAddr, fromName))
+	} else {
+		m.SetHeader("From", fromAddr)
+	}
 	m.SetHeader("To", toEmail)
 	m.SetHeader("Subject", subject)
 	m.SetBody(contentType, body)
 
-	d := gomail.NewDialer("smtp.gmail.com", 587, fromEmail, appPassword)
+	d := gomail.NewDialer(smtpHost, smtpPort, smtpUser, smtpPass)
 
-	// Send the email to Bob, Cora and Dan.
 	if err := d.DialAndSend(m); err != nil {
 		logger.StdErr.Println(err)
 	}
