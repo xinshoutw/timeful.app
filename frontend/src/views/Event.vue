@@ -1,8 +1,5 @@
 <template>
   <span>
-    <FormerlyKnownAs
-      class="tw-mx-auto tw-mb-10 tw-mt-3 tw-max-w-6xl tw-pl-4 sm:tw-pl-12"
-    />
     <div v-if="event" class="tw-mt-8 tw-h-full">
       <!-- Mark availability option dialog -->
       <!-- Guest dialog -->
@@ -433,7 +430,6 @@ import {
 import InvitationDialog from "@/components/groups/InvitationDialog.vue"
 import HelpDialog from "@/components/HelpDialog.vue"
 import EventDescription from "@/components/event/EventDescription.vue"
-import FormerlyKnownAs from "@/components/FormerlyKnownAs.vue"
 export default {
   name: "Event",
 
@@ -454,7 +450,6 @@ export default {
     InvitationDialog,
     HelpDialog,
     EventDescription,
-    FormerlyKnownAs,
   },
 
   data: () => ({
