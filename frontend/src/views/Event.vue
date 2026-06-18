@@ -550,7 +550,7 @@ export default {
     /** Add guest availability while signed in */
     addAvailabilityAsGuest() {
       this.addingAvailabilityAsGuest = true
-      this.setAvailabilityManually()
+      this.addAvailability()
     },
     cancelEditing() {
       /* Cancels editing and resets availability to previous */

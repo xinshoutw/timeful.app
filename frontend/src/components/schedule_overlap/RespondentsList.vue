@@ -556,29 +556,6 @@ export default {
     orderedRespondents() {
       const orderedRespondents = [...this.respondents]
       orderedRespondents.sort((a, b) => {
-        // Sort by added time if both are in curRespondents
-        // Sort curRespondents before others
-        if (
-          this.curRespondentsSet.has(a._id) &&
-          this.curRespondentsSet.has(b._id)
-        ) {
-          return (
-            this.curRespondentsAddedTime[a._id] -
-            this.curRespondentsAddedTime[b._id]
-          )
-        } else if (
-          this.curRespondentsSet.has(a._id) &&
-          !this.curRespondentsSet.has(b._id)
-        ) {
-          return -1
-        } else if (
-          !this.curRespondentsSet.has(a._id) &&
-          this.curRespondentsSet.has(b._id)
-        ) {
-          return 1
-        }
-
-        // Otherwise, sort by first name
         return (a.firstName || "").localeCompare(b.firstName || "")
       })
       return orderedRespondents
