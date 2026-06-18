@@ -227,7 +227,7 @@
                     small
                     icon
                     class="tw-bg-white"
-                    @click="$emit('editGuestAvailability', user._id)"
+                    @click.stop="$emit('editGuestAvailability', user._id)"
                     ><v-icon small color="#4F4F4F">mdi-pencil</v-icon></v-btn
                   >
                   <v-btn
@@ -235,7 +235,7 @@
                     small
                     icon
                     class="tw-bg-white"
-                    @click="() => showDeleteAvailabilityDialog(user)"
+                    @click.stop="() => showDeleteAvailabilityDialog(user)"
                     ><v-icon small class="hover:tw-text-red" color="#4F4F4F"
                       >mdi-delete</v-icon
                     ></v-btn
