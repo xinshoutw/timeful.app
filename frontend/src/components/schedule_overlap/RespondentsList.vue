@@ -101,8 +101,6 @@
       :style="
         maxHeight
           ? `max-height: ${maxHeight}px !important;`
-          : !isPhone
-          ? `max-height: ${respondentsListMaxHeight}px !important;`
           : ''
       "
     >
@@ -112,7 +110,7 @@
         :class="
           isPhone && !maxHeight
             ? 'tw-overflow-hidden'
-            : 'tw-overflow-y-auto tw-overflow-x-hidden'
+            : 'tw-overflow-x-hidden'
         "
       >
         <div v-if="respondents.length === 0" class="tw-mb-6">
@@ -127,7 +125,7 @@
         <template v-else>
           <transition-group
             name="list"
-            class="tw-grid tw-grid-cols-2 tw-gap-x-2 sm:tw-block"
+            class="tw-grid tw-grid-cols-2 tw-gap-x-2 sm:tw-grid-cols-2 sm:tw-gap-x-4"
           >
             <div
               v-for="(user, i) in orderedRespondents"

@@ -1232,7 +1232,7 @@ export default {
     /** Returns the width of the right side of the calendar */
     rightSideWidth() {
       if (this.isPhone) return "100%"
-      return this.isSignUp ? "18rem" : "13rem"
+      return this.isSignUp ? "18rem" : "22rem"
     },
     /** Returns the days of the week in the correct order */
     daysOfWeek() {
