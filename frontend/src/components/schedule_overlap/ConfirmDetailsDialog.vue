@@ -6,7 +6,7 @@
   >
     <v-card>
       <v-card-title class="tw-flex">
-        <div>Confirm details</div>
+        <div>確認詳細資訊</div>
         <v-spacer />
         <v-btn icon @click="$emit('input', false)">
           <v-icon>mdi-close</v-icon>
@@ -16,17 +16,16 @@
         <v-expansion-panels accordion mandatory flat>
           <v-expansion-panel>
             <v-expansion-panel-header class="tw-font-medium">
-              Attendees
+              參加者
             </v-expansion-panel-header>
             <v-expansion-panel-content>
               <div class="tw-mb-4 tw-text-dark-gray">
-                Calendar invites will be sent to people at the following
-                email addresses.
+                行事曆邀請將會寄送至以下 Email
                 <span v-if="!hasContactsAccess">
                   <a class="tw-underline" @click="requestContactsAccess"
-                    >Enable contacts access</a
+                    >啟用通訊錄存取</a
                   >
-                  to receive email auto-suggestions.
+                  以取得 Email 自動建議
                 </span>
               </div>
               <div class="tw-max-h-96 tw-table-auto tw-overflow-y-auto">
@@ -36,7 +35,7 @@
                       <th
                         class="tw-sticky tw-top-0 tw-z-10 tw-bg-white tw-pb-4"
                       >
-                        Name
+                        名字
                       </th>
                       <th
                         class="tw-sticky tw-top-0 tw-z-10 tw-bg-white tw-pb-4"
@@ -76,7 +75,7 @@
                           return-object
                           append-icon=""
                           class="tw-pt-2"
-                          placeholder="Email (optional)"
+                          placeholder="Email（選填）"
                           outlined
                           dense
                           :rules="[rules.validEmail]"
@@ -109,20 +108,20 @@
           </v-expansion-panel>
           <v-expansion-panel>
             <v-expansion-panel-header class="tw-font-medium">
-              Location & description (optional)
+              地點與描述（選填）
             </v-expansion-panel-header>
             <v-expansion-panel-content>
               <v-text-field
                 v-model="location"
                 prepend-icon="mdi-map-marker"
-                placeholder="Location"
+                placeholder="地點"
                 outlined
                 dense
               />
               <v-textarea
                 v-model="description"
                 prepend-icon="mdi-text"
-                placeholder="Description"
+                placeholder="描述"
                 outlined
                 dense
                 hide-details
@@ -139,7 +138,7 @@
           :disabled="!confirmEnabled"
           :loading="loading"
         >
-          Confirm
+          確認
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -171,7 +170,7 @@ export default {
     rules: {
       validEmail: (email) => {
         if (email?.length > 0 && !validateEmail(email)) {
-          return "Please enter a valid email."
+          return "請輸入有效的 Email"
         }
         return true
       },

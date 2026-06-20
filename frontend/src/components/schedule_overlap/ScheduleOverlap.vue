@@ -541,19 +541,19 @@
           >
             <!-- Show section on the right depending on some if conditions -->
             <template v-if="isSignUp">
-              <div class="tw-mb-2 tw-text-lg tw-text-black">Slots</div>
+              <div class="tw-mb-2 tw-text-lg tw-text-black">時段</div>
               <div v-if="!isOwner" class="tw-mb-3 tw-flex tw-flex-col">
                 <div
                   class="tw-flex tw-flex-col tw-gap-1 tw-rounded-md tw-bg-light-gray tw-p-3 tw-text-xs tw-italic tw-text-dark-gray"
                 >
                   <div v-if="!authUser || alreadyRespondedToSignUpForm">
                     <a class="tw-underline" :href="`mailto:${event.ownerId}`"
-                      >Contact sign up creator</a
+                      >聯絡報名建立者</a
                     >
-                    to edit your slot
+                    來編輯你的時段
                   </div>
                   <div v-if="event.blindAvailabilityEnabled">
-                    Responses are only visible to creator
+                    只有建立者可以看到回覆
                   </div>
                 </div>
               </div>
@@ -695,7 +695,7 @@
                   ref="optionsSection"
                 >
                   <ExpandableSection
-                    label="Options"
+                    label="選項"
                     :value="showEditOptions"
                     @input="toggleShowEditOptions"
                   >
@@ -712,13 +712,13 @@
                             v-on="on"
                             v-bind="attrs"
                           >
-                            Calendar options...
+                            行事曆選項...
                           </v-btn>
                         </template>
 
                         <v-card>
                           <v-card-title class="tw-flex">
-                            <div>Calendar options</div>
+                            <div>行事曆選項</div>
                             <v-spacer />
                             <v-btn icon @click="calendarOptionsDialog = false">
                               <v-icon>mdi-close</v-icon>
@@ -728,8 +728,7 @@
                             class="tw-flex tw-flex-col tw-gap-6 tw-pb-8 tw-pt-2"
                           >
                             <AlertText v-if="isGroup" class="-tw-mb-4">
-                              Calendar options will only updated for the current
-                              group
+                              行事曆選項只會針對目前的群組更新
                             </AlertText>
 
                             <BufferTimeSwitch
@@ -2041,14 +2040,14 @@ export default {
       if (this.isPhone) {
         switch (this.state) {
           case this.isGroup && this.states.EDIT_AVAILABILITY:
-            return "Toggle which calendars are used. Tap and drag to edit your availability."
+            return "切換要使用的行事曆。輕觸並拖曳來編輯你的有空時段"
           case this.states.EDIT_AVAILABILITY:
             if (this.availabilityType === availabilityTypes.IF_NEEDED) {
               return `輕觸或拖曳來標記「如果有需要」的時段`
             }
             return `輕觸或拖曳來標記「有空」的時段`
           case this.states.SCHEDULE_EVENT:
-            return "Tap and drag on the calendar to schedule a calendar event during those times."
+            return "在行事曆上輕觸並拖曳來排定行程"
           default:
             return ""
         }
@@ -2056,7 +2055,7 @@ export default {
 
       switch (this.state) {
         case this.isGroup && this.states.EDIT_AVAILABILITY:
-          return "Toggle which calendars are used. Click and drag to edit your availability."
+          return "切換要使用的行事曆。點擊並拖曳來編輯你的有空時段"
         case this.states.EDIT_AVAILABILITY:
           // const daysOrTimes = this.event.daysOnly ? "days" : "times"
           if (this.availabilityType === availabilityTypes.IF_NEEDED) {
@@ -2064,7 +2063,7 @@ export default {
           }
           return `點擊或拖曳來標記「有空」的時段`
         case this.states.SCHEDULE_EVENT:
-          return "Click and drag on the calendar to schedule a calendar event during those times."
+          return "在行事曆上點擊並拖曳來排定行程"
         default:
           return ""
       }
@@ -2458,7 +2457,7 @@ export default {
         })
         .catch((err) => {
           this.showError(
-            "There was an error fetching availability! Please refresh the page."
+            "取得空檔資料時發生錯誤！請重新整理頁面"
           )
         })
     },
@@ -2798,7 +2797,7 @@ export default {
                 this.availabilityAnimEnabled = false
 
                 if (this.showSnackbar) {
-                  this.showInfo("Your availability has been autofilled!")
+                  this.showInfo("已自動填入你的有空時段！")
                 }
                 this.unsavedChanges = false
               }, 500)
@@ -2893,7 +2892,7 @@ export default {
           this.signUpBlocksByDay.flat().length ===
         0
       ) {
-        this.showError("Please add at least one sign-up block!")
+        this.showError("請至少新增一個報名時段！")
         return false
       }
 
@@ -2927,7 +2926,7 @@ export default {
         .catch((err) => {
           console.error(err)
           this.showError(
-            "There was a problem editing this event! Please try again later."
+            "編輯此活動時發生問題，請稍後再試"
           )
         })
 
@@ -3495,7 +3494,7 @@ export default {
     async saveGuestName() {
       const newName = this.newGuestName.trim()
       if (newName.length === 0) {
-        this.showError("Guest name cannot be empty")
+        this.showError("訪客名稱不能為空")
         return
       }
       if (newName === this.curGuestId) {
@@ -3509,13 +3508,13 @@ export default {
         })
         // Store with event._id (current format used by guestNameKey)
         localStorage[this.guestNameKey] = newName
-        this.showInfo("Guest name updated successfully")
+        this.showInfo("已成功更新訪客名稱")
         this.editGuestNameDialog = false
         this.$emit("setCurGuestId", newName)
         this.refreshEvent()
       } catch (err) {
         const errorMessage =
-          err.parsed?.error || err.message || "Failed to update guest name"
+          err.parsed?.error || err.message || "更新訪客名稱失敗"
         this.showError(errorMessage)
       }
     },

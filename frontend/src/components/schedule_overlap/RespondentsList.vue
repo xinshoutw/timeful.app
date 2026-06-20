@@ -2,7 +2,7 @@
   <div>
     <div class="tw-flex tw-items-center tw-font-medium">
       <template v-if="!isOwner && event.blindAvailabilityEnabled">
-        Your response
+        你的回覆
       </template>
       <template v-else>
         <div class="tw-mr-1 tw-text-lg">
@@ -85,7 +85,7 @@
           class="tw-mt-2 tw-text-sm tw-font-normal tw-text-dark-gray"
           :class="showIfNeededStar ? 'tw-visible' : 'tw-invisible'"
         >
-          * if needed
+          * 如果有需要
         </div>
       </template>
     </div>
@@ -93,7 +93,7 @@
       v-if="isOwner && !isPhone && event.blindAvailabilityEnabled"
       class="tw-mb-2 tw-mt-1 tw-text-xs tw-italic tw-text-very-dark-gray"
     >
-      Responses are only visible to {{ isOwner ? "you" : "event creator" }}
+      只有{{ isOwner ? "你" : "活動建立者" }}可以看到回覆
     </div>
     <div
       ref="scrollableSection"
@@ -261,14 +261,14 @@
         class="tw-col-span-full tw-mb-2 tw-mt-1 tw-text-sm tw-text-dark-gray"
         :class="showIfNeededStar ? 'tw-visible' : 'tw-invisible'"
       >
-        * if needed
+        * 如果有需要
       </div>
       <div
         v-if="!maxHeight && pendingUsers.length > 0"
         class="tw-mb-4 sm:tw-mb-6"
       >
         <div class="tw-mb-2 tw-flex tw-items-center tw-font-medium">
-          <div class="tw-mr-1 tw-text-lg">Pending</div>
+          <div class="tw-mr-1 tw-text-lg">待回覆</div>
           <div class="tw-font-normal">({{ pendingUsers.length }})</div>
         </div>
         <div>
@@ -303,7 +303,7 @@
           "
         >
           {{
-            authUser ? "+ Add guest availability" : "+ Add availability"
+            authUser ? "+ 以訪客身分新增空檔" : "+ 新增空檔"
           }}</v-btn
         >
         <v-switch
@@ -346,17 +346,16 @@
       v-if="(!isOwner || isPhone) && event.blindAvailabilityEnabled"
       class="tw-mt-2 tw-text-xs tw-italic tw-text-very-dark-gray"
     >
-      Responses are only visible to {{ isOwner ? "you" : "event creator" }}
+      只有{{ isOwner ? "你" : "活動建立者" }}可以看到回覆
     </div>
 
     <v-dialog v-model="deleteAvailabilityDialog" width="500" persistent>
       <v-card>
-        <v-card-title>Are you sure?</v-card-title>
+        <v-card-title>確定嗎？</v-card-title>
         <v-card-text class="tw-text-sm tw-text-dark-gray"
-          >Are you sure you want to delete
-          <strong>{{ userToDelete?.firstName }}</strong
-          >'s availability from this
-          {{ isGroup ? "group" : "event" }}?</v-card-text
+          >你確定要刪除
+          <strong>{{ userToDelete?.firstName }}</strong>
+          在這個{{ isGroup ? "群組" : "活動" }}的空檔紀錄嗎？</v-card-text
         >
         <v-card-actions>
           <v-spacer />
@@ -386,7 +385,7 @@
       hide-details
     >
       <template v-slot:label>
-        <div class="tw-text-sm tw-text-black">Overlay calendar events</div>
+        <div class="tw-text-sm tw-text-black">疊加顯示行事曆活動</div>
       </template>
     </v-switch>
 
@@ -411,7 +410,7 @@
         }
       "
     >
-      {{ authUser ? "+ Add guest availability" : "+ Add availability" }}</v-btn
+      {{ authUser ? "+ 以訪客身分新增空檔" : "+ 新增空檔" }}</v-btn
     >
   </div>
 </template>
@@ -470,10 +469,10 @@ export default {
         type: "datesToAvailable",
         types: [
           {
-            text: "Dates <> people available",
+            text: "日期 <> 有空的人",
             value: "datesToAvailable",
           },
-          { text: "Name <> dates available", value: "nameToDates" },
+          { text: "姓名 <> 有空的日期", value: "nameToDates" },
         ],
       },
       userToDelete: null,
@@ -624,7 +623,7 @@ export default {
           name: user._id,
         })
         this.$emit("refreshEvent")
-        this.showInfo("Availability successfully deleted!")
+        this.showInfo("已成功刪除空檔紀錄！")
 
         this.$posthog?.capture("Deleted availability of another user", {
           eventId: this.eventId,
@@ -633,7 +632,7 @@ export default {
       } catch (e) {
         console.error(e)
         this.showError(
-          "There was an error deleting that person's availability!"
+          "刪除該使用者的空檔紀錄時發生錯誤！"
         )
       }
     },
@@ -663,7 +662,7 @@ export default {
 
       if (this.exportCsvDialog.type === "datesToAvailable") {
         // Write CSV header
-        const header = ["Date / Time"]
+        const header = ["日期 / 時間"]
         header.push(
           ...responses.map((r) => r.user.firstName + " " + r.user.lastName)
         )
@@ -680,9 +679,9 @@ export default {
             // Iterate through the responses and mark whether they are available or not
             for (const response of responses) {
               if (response.availability.has(curDate.getTime())) {
-                row.push("Available")
+                row.push("有空")
               } else if (response.ifNeeded.has(curDate.getTime())) {
-                row.push("If needed")
+                row.push("如果有需要")
               } else {
                 row.push("")
               }
@@ -697,7 +696,7 @@ export default {
         }
       } else if (this.exportCsvDialog.type === "nameToDates") {
         // Write CSV header
-        csv.push(["Name", "Date / Times available"])
+        csv.push(["姓名", "有空的日期 / 時間"])
 
         // Iterate through the responses
         for (const response of responses) {
@@ -762,10 +761,10 @@ export default {
     async copyEmailToClipboard(email) {
       try {
         await navigator.clipboard.writeText(email)
-        this.showInfo("Email copied to clipboard!")
+        this.showInfo("已複製 Email 到剪貼簿！")
       } catch (err) {
         console.error("Failed to copy email: ", err)
-        this.showError("Failed to copy email.")
+        this.showError("複製 Email 失敗")
       }
     },
   },
