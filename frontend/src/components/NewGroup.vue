@@ -28,8 +28,8 @@
           <template v-slot:header>Availability groups</template>
           <div class="mb-4">
             Use availability groups to see group members' weekly calendar
-            availabilities from Google Calendar. Your actual calendar events
-            will NOT be visible to others.
+            availabilities. Your actual calendar events will NOT be visible to
+            others.
           </div>
         </HelpDialog>
       </template>
@@ -175,7 +175,6 @@ import {
 import { mapState, mapActions } from "vuex"
 import { eventTypes, dayIndexToDayString } from "@/constants"
 import HelpDialog from "./HelpDialog.vue"
-import CalendarPermissionsCard from "./calendar_permission_dialogs/CalendarPermissionsCard.vue"
 import TimezoneSelector from "./schedule_overlap/TimezoneSelector.vue"
 import EmailInput from "./event/EmailInput.vue"
 
@@ -203,7 +202,6 @@ export default {
     HelpDialog,
     TimezoneSelector,
     EmailInput,
-    CalendarPermissionsCard,
   },
 
   data: () => ({

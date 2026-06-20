@@ -114,8 +114,8 @@
                       <template v-slot:header>Availability group</template>
                       <div class="mb-4">
                         Use availability groups to see group members' weekly
-                        calendar availabilities from Google Calendar. Your
-                        actual calendar events are NOT visible to others.
+                        calendar availabilities. Your actual calendar events
+                        are NOT visible to others.
                       </div>
                     </HelpDialog>
                   </template>
@@ -387,7 +387,6 @@ import {
   errors,
   authTypes,
   eventTypes,
-  calendarTypes,
   dayIndexToDayString,
   allTimezones,
   guestUserId,
@@ -402,7 +401,6 @@ export default {
     eventId: { type: String, required: true },
     fromSignIn: { type: Boolean, default: false },
     editingMode: { type: Boolean, default: false },
-    linkApple: { type: Boolean, default: false },
     initialTimezone: { type: Object, default: () => ({}) },
     contactsPayload: { type: Object, default: () => ({}) },
   },
@@ -464,9 +462,6 @@ export default {
     ...mapGetters(["isPremiumUser"]),
     allowScheduleEvent() {
       return this.scheduleOverlapComponent?.allowScheduleEvent
-    },
-    calendarTypes() {
-      return calendarTypes
     },
     dateString() {
       return getDateRangeStringForEvent(this.event)

@@ -20,7 +20,7 @@
             </v-expansion-panel-header>
             <v-expansion-panel-content>
               <div class="tw-mb-4 tw-text-dark-gray">
-                Google Calendar invites will be sent to people at the following
+                Calendar invites will be sent to people at the following
                 email addresses.
                 <span v-if="!hasContactsAccess">
                   <a class="tw-underline" @click="requestContactsAccess"

@@ -1077,7 +1077,7 @@ export default {
     loadingCalendarEvents: { type: Boolean, default: false }, // Whether we are currently loading the calendar events
     calendarEventsMap: { type: Object, default: () => {} }, // Object of different users' calendar events
     sampleCalendarEventsByDay: { type: Array, required: false }, // Sample calendar events to use for example calendars
-    calendarPermissionGranted: { type: Boolean, default: false }, // Whether user has granted google calendar permissions
+    calendarPermissionGranted: { type: Boolean, default: false },
 
     weekOffset: { type: Number, default: 0 }, // Week offset used for displaying calendar events on weekly Timefuls
 
@@ -2048,7 +2048,7 @@ export default {
             }
             return `輕觸或拖曳來標記「有空」的時段`
           case this.states.SCHEDULE_EVENT:
-            return "Tap and drag on the calendar to schedule a Google Calendar event during those times."
+            return "Tap and drag on the calendar to schedule a calendar event during those times."
           default:
             return ""
         }
@@ -2064,7 +2064,7 @@ export default {
           }
           return `點擊或拖曳來標記「有空」的時段`
         case this.states.SCHEDULE_EVENT:
-          return "Click and drag on the calendar to schedule a Google Calendar event during those times."
+          return "Click and drag on the calendar to schedule a calendar event during those times."
         default:
           return ""
       }

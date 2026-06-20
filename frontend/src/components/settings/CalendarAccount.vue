@@ -129,11 +129,7 @@ export default {
   computed: {
     ...mapState(["authUser"]),
     allowDelete() {
-      return !(
-        (this.account.calendarType == calendarTypes.GOOGLE &&
-          this.account.email == this.authUser.email) ||
-        this.toggleState
-      )
+      return !this.toggleState
     },
     hasSubCalendars() {
       return this.account.calendarType !== calendarTypes.ICS
@@ -150,13 +146,7 @@ export default {
       return !(this.toggleState && this.accountHasError)
     },
     reauthenticateBtnText() {
-      if (this.account.calendarType == calendarTypes.GOOGLE) {
-        return "Calendar access not granted, click to reauthenticate"
-      } else if (this.account.calendarType == calendarTypes.APPLE) {
-        return "Error with Apple Calendar account, click to remove"
-      } else if (this.account.calendarType == calendarTypes.OUTLOOK) {
-        return "Error with Outlook Calendar account, click to remove"
-      }
+      return "Error with calendar account, click to remove"
     },
   },
 
