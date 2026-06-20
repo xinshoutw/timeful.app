@@ -9,7 +9,7 @@
       item-text="queryString"
       item-value="queryString"
       class="tw-mt-2 tw-text-sm"
-      placeholder="Type an email address and press enter..."
+      placeholder="輸入 Email 並按下 Enter..."
       multiple
       append-icon=""
       solo
