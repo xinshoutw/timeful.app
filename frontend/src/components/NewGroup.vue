@@ -7,13 +7,13 @@
     <v-card-title class="tw-mb-2 tw-flex tw-gap-2 tw-px-4 sm:tw-px-8">
       <div>
         <div class="tw-mb-1">
-          {{ edit ? "Edit group" : "New group" }}
+          {{ edit ? "編輯群組" : "新增群組" }}
         </div>
         <div
           v-if="dialog && showHelp"
           class="tw-text-xs tw-font-normal tw-italic tw-text-dark-gray"
         >
-          Ideal for viewing weekly calendar availability
+          適合查看每週行事曆空閒時間
         </div>
       </div>
       <v-spacer />
@@ -25,11 +25,9 @@
           <v-icon>mdi-close</v-icon>
         </v-btn>
         <HelpDialog v-model="helpDialog">
-          <template v-slot:header>Availability groups</template>
+          <template v-slot:header>共用行事曆群組</template>
           <div class="mb-4">
-            Use availability groups to see group members' weekly calendar
-            availabilities. Your actual calendar events will NOT be visible to
-            others.
+            使用共用行事曆群組來查看成員每週的行事曆空閒時間。你的實際行事曆活動不會被其他人看到
           </div>
         </HelpDialog>
       </template>
@@ -45,7 +43,7 @@
         <v-text-field
           ref="name-field"
           v-model="name"
-          placeholder="Name your group..."
+          placeholder="為你的群組命名..."
           hide-details="auto"
           solo
           @keyup.enter="blurNameField"
@@ -54,7 +52,7 @@
         />
 
         <div>
-          <div class="tw-mb-2 tw-text-lg tw-text-black">Time range</div>
+          <div class="tw-mb-2 tw-text-lg tw-text-black">時間範圍</div>
           <div class="tw-flex tw-items-baseline tw-justify-center tw-space-x-2">
             <v-select
               v-model="startTime"
@@ -63,7 +61,7 @@
               hide-details
               solo
             ></v-select>
-            <div>to</div>
+            <div>至</div>
             <v-select
               v-model="endTime"
               menu-props="auto"
@@ -75,7 +73,7 @@
         </div>
 
         <div>
-          <div class="tw-mb-2 tw-text-lg tw-text-black">Day range</div>
+          <div class="tw-mb-2 tw-text-lg tw-text-black">天數範圍</div>
           <v-input
             v-model="selectedDaysOfWeek"
             hide-details="auto"
@@ -113,7 +111,7 @@
           @update:emails="(newEmails) => (emails = newEmails)"
         >
           <template v-slot:header>
-            <div class="tw-mb-2 tw-text-lg tw-text-black">Members</div>
+            <div class="tw-mb-2 tw-text-lg tw-text-black">成員</div>
           </template>
         </EmailInput>
         <!-- </div> -->
@@ -124,7 +122,7 @@
             block
             text
             @click="showAdvancedOptions = !showAdvancedOptions"
-            ><span class="tw-mr-1">Advanced options</span>
+            ><span class="tw-mr-1">進階選項</span>
             <v-icon :class="`tw-rotate-${showAdvancedOptions ? '180' : '0'}`"
               >mdi-chevron-down</v-icon
             ></v-btn
@@ -132,7 +130,7 @@
           <v-expand-transition>
             <div v-show="showAdvancedOptions">
               <div class="tw-my-2">
-                <TimezoneSelector v-model="timezone" label="Timezone" />
+                <TimezoneSelector v-model="timezone" label="時區" />
               </div>
             </div>
           </v-expand-transition>
@@ -149,13 +147,13 @@
           class="tw-mt-4 tw-bg-green"
           @click="submit"
         >
-          {{ edit ? "Save edits" : "Create group" }}
+          {{ edit ? "儲存變更" : "建立群組" }}
         </v-btn>
         <div
           :class="formValid ? 'tw-invisible' : 'tw-visible'"
           class="tw-mt-1 tw-text-xs tw-text-red"
         >
-          Please fix form errors before continuing
+          請先修正表單中的錯誤再繼續
         </div>
       </div>
     </v-card-actions>
@@ -224,12 +222,12 @@ export default {
   computed: {
     ...mapState(["authUser"]),
     nameRules() {
-      return [(v) => !!v || "Group name is required"]
+      return [(v) => !!v || "請輸入名稱"]
     },
     selectedDaysRules() {
       return [
         (selectedDays) =>
-          selectedDays.length > 0 || "Please select at least one day",
+          selectedDays.length > 0 || "請至少選擇一天",
       ]
     },
     formEmpty() {
@@ -246,12 +244,12 @@ export default {
       const times = []
 
       for (let h = 1; h < 12; ++h) {
-        times.push({ text: `${h} am`, value: h })
+        times.push({ text: `上午 ${h} 點`, value: h })
       }
       for (let h = 0; h < 12; ++h) {
-        times.push({ text: `${h == 0 ? 12 : h} pm`, value: h + 12 })
+        times.push({ text: `下午 ${h == 0 ? 12 : h} 點`, value: h + 12 })
       }
-      times.push({ text: "12 am", value: 0 })
+      times.push({ text: "上午 12 點", value: 0 })
 
       return times
     },
@@ -363,7 +361,7 @@ export default {
           })
           .catch((err) => {
             this.showError(
-              "There was a problem creating that group! Please try again later."
+              "建立群組時發生問題！請稍後再試"
             )
             console.error(err)
           })
@@ -397,7 +395,7 @@ export default {
           })
           .catch((err) => {
             this.showError(
-              "There was a problem editing this group! Please try again later."
+              "編輯群組時發生問題！請稍後再試"
             )
           })
           .finally(() => {

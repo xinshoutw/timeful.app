@@ -7,13 +7,13 @@
     <v-card-title class="tw-mb-2 tw-flex tw-gap-2 tw-px-4 sm:tw-px-8">
       <div>
         <div class="tw-mb-1">
-          {{ edit ? "Edit sign up" : "New sign up" }}
+          {{ edit ? "編輯報名表" : "新增報名表" }}
         </div>
         <div
           v-if="dialog && showHelp"
           class="tw-text-xs tw-font-normal tw-italic tw-text-dark-gray"
         >
-          Ideal for events with sign up slots
+          適合有報名時段的活動
         </div>
       </div>
       <v-spacer />
@@ -25,10 +25,9 @@
           <v-icon>mdi-close</v-icon>
         </v-btn>
         <HelpDialog v-model="helpDialog">
-          <template v-slot:header>Events</template>
+          <template v-slot:header>活動</template>
           <div class="tw-mb-4">
-            Use events to collect people's availabilities and compare them
-            across certain days.
+            使用活動功能來收集大家的空閒時間，並比較特定日期的可用時段
           </div>
         </HelpDialog>
       </template>
@@ -47,7 +46,7 @@
         <v-text-field
           ref="name-field"
           v-model="name"
-          placeholder="Name your event..."
+          placeholder="為你的活動命名..."
           hide-details="auto"
           solo
           @keyup.enter="blurNameField"
@@ -66,7 +65,7 @@
           <v-expand-transition>
             <div v-if="!daysOnly">
               <div class="tw-mb-2 tw-text-lg tw-text-black">
-                What times might work?
+                哪些時段可能可以？
               </div>
               <div
                 class="tw-mb-6 tw-flex tw-items-baseline tw-justify-center tw-space-x-2"
@@ -80,7 +79,7 @@
                   hide-details
                   solo
                 ></v-select>
-                <div>to</div>
+                <div>至</div>
                 <v-select
                   :value="endTime"
                   @input="(t) => (endTime = t.time)"
@@ -95,9 +94,7 @@
           </v-expand-transition>
 
           <div class="tw-mb-2 tw-text-lg tw-text-black">
-            What
-            {{ selectedDateOption === dateOptions.SPECIFIC ? "dates" : "days" }}
-            might work?
+            哪些{{ selectedDateOption === dateOptions.SPECIFIC ? "時段" : "天" }}可能可以？
           </div>
           <v-select
             v-if="!edit && !daysOnly"
@@ -111,7 +108,7 @@
           <v-expand-transition>
             <div v-if="selectedDateOption === dateOptions.SPECIFIC || daysOnly">
               <div class="tw-mb-2 tw-text-xs tw-text-dark-gray">
-                Drag to select multiple dates
+                拖曳以選取多個日期
               </div>
               <v-input
                 v-model="selectedDays"
@@ -163,7 +160,7 @@
         <v-checkbox v-model="notificationsEnabled" hide-details class="tw-mt-2">
           <template v-slot:label>
             <span class="tw-text-sm tw-text-very-dark-gray"
-              >Email me each time someone signs up</span
+              >每次有人報名時寄 Email 通知我</span
             >
           </template>
         </v-checkbox>
@@ -171,7 +168,7 @@
         <v-checkbox v-model="collectEmails">
           <template v-slot:label>
             <span class="tw-text-sm tw-text-very-dark-gray">
-              Collect email address on sign up
+              報名時收集 Email 地址
             </span>
           </template>
         </v-checkbox>
@@ -222,18 +219,18 @@
 
           <ExpandableSection
             v-model="showAdvancedOptions"
-            label="Advanced options"
+            label="進階選項"
             :auto-scroll="dialog"
           >
             <div class="tw-flex tw-flex-col tw-gap-5 tw-pt-2">
               <v-checkbox
                 v-if="authUser"
                 v-model="blindAvailabilityEnabled"
-                messages="Only show attendees to sign up creator"
+                messages="僅向報名表建立者顯示報名者"
               >
                 <template v-slot:label>
                   <span class="tw-text-sm tw-text-black">
-                    Hide attendees from each other
+                    隱藏報名者彼此的資訊
                   </span>
                 </template>
                 <template v-slot:message="{ key, message }">
@@ -247,12 +244,12 @@
               <v-checkbox
                 v-else
                 disabled
-                messages="Only show responses to event creator. "
+                messages="僅向活動建立者顯示回覆"
                 off-icon="mdi-checkbox-blank-off-outline"
               >
                 <template v-slot:label>
                   <span class="tw-text-sm"
-                    >Hide responses from respondents</span
+                    >對回覆者隱藏其他人的回覆</span
                   >
                 </template>
                 <template v-slot:message="{ key, message }">
@@ -298,7 +295,7 @@
                   </div>
                 </template>
               </v-checkbox> -->
-              <TimezoneSelector v-model="timezone" label="Timezone" />
+              <TimezoneSelector v-model="timezone" label="時區" />
             </div>
           </ExpandableSection>
         </div>
@@ -314,13 +311,13 @@
           class="tw-mt-4 tw-bg-green"
           @click="submit"
         >
-          {{ edit ? "Save edits" : "Create event" }}
+          {{ edit ? "儲存編輯" : "建立活動" }}
         </v-btn>
         <div
           :class="formValid ? 'tw-invisible' : 'tw-visible'"
           class="tw-mt-1 tw-text-xs tw-text-red"
         >
-          Please fix form errors before continuing
+          請先修正表單錯誤再繼續
         </div>
       </div>
     </v-card-actions>
@@ -404,16 +401,16 @@ export default {
 
     daysOnly: false,
     daysOnlyOptions: Object.freeze([
-      { text: "Dates and times", value: false },
-      { text: "Dates only", value: true },
+      { text: "日期與時間", value: false },
+      { text: "僅日期", value: true },
     ]),
 
     // Date options
     dateOptions: Object.freeze({
-      SPECIFIC: "Specific dates",
-      DOW: "Days of the week",
+      SPECIFIC: "特定日期",
+      DOW: "星期幾",
     }),
-    selectedDateOption: "Specific dates",
+    selectedDateOption: "特定日期",
 
     // Email reminders
     showEmailReminders: false,
@@ -461,12 +458,12 @@ export default {
   computed: {
     ...mapState(["authUser", "daysOnlyEnabled"]),
     nameRules() {
-      return [(v) => !!v || "Event name is required"]
+      return [(v) => !!v || "請輸入活動名稱"]
     },
     selectedDaysRules() {
       return [
         (selectedDays) =>
-          selectedDays.length > 0 || "Please select at least one day",
+          selectedDays.length > 0 || "請至少選擇一天",
       ]
     },
     addedEmails() {
@@ -628,7 +625,7 @@ export default {
           })
           .catch((err) => {
             this.showError(
-              "There was a problem creating that event! Please try again later."
+              "建立活動時發生問題！請稍後再試"
             )
           })
           .finally(() => {
@@ -648,7 +645,7 @@ export default {
             })
             .catch((err) => {
               this.showError(
-                "There was a problem editing this event! Please try again later."
+                "編輯活動時發生問題！請稍後再試"
               )
             })
             .finally(() => {

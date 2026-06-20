@@ -114,9 +114,9 @@ export default {
     return {
       tab: this.type,
       tabs: [
-        { title: "Event", type: "event" },
-        { title: "Sign up form", type: "signup" },
-        { title: "Availability group", type: "group" },
+        { title: "活動", type: "event" },
+        { title: "報名表", type: "signup" },
+        { title: "共用行事曆群組", type: "group" },
       ],
 
       unsavedChangesDialog: false,
@@ -157,22 +157,22 @@ export default {
       immediate: true,
       handler() {
         this.tabs = [
-          { title: "Event", type: "event" },
-          { title: "Sign up form", type: "signup" },
+          { title: "活動", type: "event" },
+          { title: "報名表", type: "signup" },
         ]
         if (this.groupsEnabled) {
-          this.tabs.push({ title: "Availability group", type: "group" })
+          this.tabs.push({ title: "共用行事曆群組", type: "group" })
         }
       },
     },
     signUpFormEnabled: {
       immediate: true,
       handler() {
-        this.tabs = [{ title: "Event", type: "event" }]
+        this.tabs = [{ title: "活動", type: "event" }]
         if (this.signUpFormEnabled) {
-          this.tabs.push({ title: "Sign up form", type: "signup" })
+          this.tabs.push({ title: "報名表", type: "signup" })
         }
-        this.tabs.push({ title: "Availability group", type: "group" })
+        this.tabs.push({ title: "共用行事曆群組", type: "group" })
       },
     },
     value: {
