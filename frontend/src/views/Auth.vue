@@ -3,7 +3,7 @@
 <script>
 import { get, post, getEventsCreated, deleteEventsCreated } from "@/utils"
 import { mapMutations, mapState } from "vuex"
-import { authTypes, calendarTypes } from "@/constants"
+import { authTypes } from "@/constants"
 
 export default {
   name: "Auth",
@@ -22,42 +22,23 @@ export default {
 
     if (state) state = JSON.parse(decodeURIComponent(state))
 
-    // Sign in and set auth user
     try {
-      if (
-        state?.type === authTypes.ADD_CALENDAR_ACCOUNT ||
-        state?.type === authTypes.ADD_CALENDAR_ACCOUNT_FROM_EDIT
-      ) {
-        if (state.calendarType === calendarTypes.GOOGLE) {
-          await post("/user/add-google-calendar-account", { code, scope })
-        } else if (state.calendarType === calendarTypes.OUTLOOK) {
-          await post("/user/add-outlook-calendar-account", {
-            code,
-            scope: state.scope,
-          })
-        } else {
-          throw new Error("Invalid calendar type")
-        }
-      } else {
-        const user = await post("/auth/sign-in", {
-          code,
-          scope: scope ?? state.scope,
-          calendarType: state.calendarType,
-          timezoneOffset: new Date().getTimezoneOffset(),
-          eventsToLink: getEventsCreated(),
-        })
-        deleteEventsCreated()
+      const user = await post("/auth/sign-in", {
+        code,
+        scope: scope ?? state?.scope,
+        timezoneOffset: new Date().getTimezoneOffset(),
+        eventsToLink: getEventsCreated(),
+      })
+      deleteEventsCreated()
 
-        this.setAuthUser(user)
+      this.setAuthUser(user)
 
-        this.$posthog?.identify(user._id, {
-          email: user.email,
-          firstName: user.firstName,
-          lastName: user.lastName,
-        })
-      }
+      this.$posthog?.identify(user._id, {
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+      })
 
-      // Redirect to the correct place based on "state", otherwise, just redirect to home
       if (state) {
         let authUser
         switch (state.type) {
@@ -71,12 +52,6 @@ export default {
             this.$router.replace({
               name: "event",
               params: { eventId: state.eventId },
-            })
-            break
-          case authTypes.EVENT_SIGN_IN_LINK_APPLE:
-            this.$router.replace({
-              name: "event",
-              params: { eventId: state.eventId, linkApple: true },
             })
             break
           case authTypes.GROUP_CREATE:
@@ -97,21 +72,6 @@ export default {
             this.$router.replace({
               name: "group",
               params: { groupId: state.eventId, fromSignIn: true },
-            })
-            authUser = await get("/user/profile")
-            this.setAuthUser(authUser)
-            break
-          case authTypes.ADD_CALENDAR_ACCOUNT:
-            this.$router.replace({
-              name: "settings",
-            })
-            authUser = await get("/user/profile")
-            this.setAuthUser(authUser)
-            break
-          case authTypes.ADD_CALENDAR_ACCOUNT_FROM_EDIT:
-            this.$router.replace({
-              name: "event",
-              params: { eventId: state.eventId, fromSignIn: true },
             })
             authUser = await get("/user/profile")
             this.setAuthUser(authUser)
