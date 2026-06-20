@@ -17,15 +17,15 @@
             class="tw-mb-0 tw-h-[150px] tw-flex-none sm:tw-h-[200px]"
           />
           <div class="tw-text-xl tw-font-medium">
-            You've upgraded to <br class="tw-block sm:tw-hidden" />
+            已升級至 <br class="tw-block sm:tw-hidden" />
             <span
               class="tw-bg-gradient-to-r tw-from-darkest-green tw-to-light-green tw-bg-clip-text tw-text-transparent"
               >Timeful Premium</span
-            >!
+            >！
           </div>
           <div>
             <v-btn color="primary" @click="navigateToRedirectUrl">
-              Continue
+              繼續
             </v-btn>
           </div>
         </div>

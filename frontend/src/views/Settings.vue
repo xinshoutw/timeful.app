@@ -6,23 +6,23 @@
         <div
           class="tw-text-xl tw-font-medium tw-text-dark-green sm:tw-text-2xl"
         >
-          Profile
+          個人資料
         </div>
         <div>
-          <div class="tw-mb-1 tw-font-medium">Name</div>
+          <div class="tw-mb-1 tw-font-medium">姓名</div>
           <div class="tw-flex tw-max-w-lg tw-items-center tw-gap-2">
             <v-text-field
               v-model="firstName"
               hide-details
               outlined
-              placeholder="First name"
+              placeholder="名字"
               :dense="isPhone"
             />
             <v-text-field
               v-model="lastName"
               hide-details
               outlined
-              placeholder="Last name"
+              placeholder="姓氏"
               :dense="isPhone"
             />
           </div>
@@ -34,9 +34,9 @@
                   color="primary"
                   outlined
                   class="tw-mr-2"
-                  >Cancel</v-btn
+                  >取消</v-btn
                 >
-                <v-btn @click="saveName" color="primary">Save changes</v-btn>
+                <v-btn @click="saveName" color="primary">儲存變更</v-btn>
               </div>
             </div>
           </v-expand-transition>
@@ -51,11 +51,11 @@
         <div
           class="tw-text-xl tw-font-medium tw-text-dark-green sm:tw-text-2xl"
         >
-          Billing
+          帳單
         </div>
         <div class="tw-flex tw-flex-col tw-gap-5 sm:tw-flex-row sm:tw-gap-28">
           <div class="tw-text-black">
-            <v-btn @click="openBillingPortal">Manage billing</v-btn>
+            <v-btn @click="openBillingPortal">管理帳單</v-btn>
           </div>
         </div>
       </div>
@@ -65,17 +65,16 @@
         <div
           class="tw-text-xl tw-font-medium tw-text-dark-green sm:tw-text-2xl"
         >
-          Have a question?
+          有問題嗎？
         </div>
         <div class="tw-flex tw-flex-col tw-gap-5 sm:tw-flex-row sm:tw-gap-28">
           <div class="tw-text-black">
-            Email us at
+            有任何問題歡迎寄信至
             <a
               href="mailto:contact@timeful.app"
               class="tw-text-black tw-underline"
               >contact@timeful.app</a
             >
-            with any questions!
           </div>
         </div>
       </div>
@@ -86,18 +85,17 @@
           <v-dialog v-model="deleteDialog" width="400" persistent>
             <template v-slot:activator="{ on, attrs }">
               <v-btn outlined class="tw-text-red" block v-bind="attrs" v-on="on"
-                >Delete account</v-btn
+                >刪除帳號</v-btn
               >
             </template>
             <v-card>
-              <v-card-title>Are you sure?</v-card-title>
+              <v-card-title>確定要刪除嗎？</v-card-title>
               <v-card-text class="tw-text-sm tw-text-dark-gray"
-                >Are you sure you want to delete your account? All your account
-                data will be lost.</v-card-text
+                >確定要刪除你的帳號嗎？所有帳號資料將會永久遺失</v-card-text
               >
               <div class="tw-mx-6">
                 <div class="tw-text-sm tw-text-dark-gray">
-                  Type your email in the box below to confirm:
+                  請在下方輸入你的 Email 確認：
                 </div>
                 <v-text-field
                   v-model="deleteValidateEmail"
@@ -108,13 +106,13 @@
               </div>
               <v-card-actions>
                 <v-spacer />
-                <v-btn text @click="deleteDialog = false">Cancel</v-btn>
+                <v-btn text @click="deleteDialog = false">取消</v-btn>
                 <v-btn
                   text
                   color="error"
                   @click="deleteAccount()"
                   :disabled="authUser.email != deleteValidateEmail"
-                  >Delete</v-btn
+                  >刪除</v-btn
                 >
               </v-card-actions>
             </v-card>
@@ -174,7 +172,7 @@ export default {
         })
         .catch((err) => {
           this.showError(
-            "There was a problem opening the billing portal! Please try again later."
+            "開啟帳單管理頁面時發生問題，請稍後再試"
           )
         })
     },
@@ -185,7 +183,7 @@ export default {
         })
         .catch((err) => {
           this.showError(
-            "There was a problem deleting your account! Please try again later."
+            "刪除帳號時發生問題，請稍後再試"
           )
         })
     },
@@ -203,7 +201,7 @@ export default {
         })
         .catch((err) => {
           this.showError(
-            "There was a problem updating your name! Please try again later."
+            "更新姓名時發生問題，請稍後再試"
           )
         })
     },

@@ -3,20 +3,19 @@
     class="tw-mx-auto tw-mt-4 tw-flex tw-h-full tw-max-w-5xl tw-flex-col tw-items-center tw-justify-center"
   >
     <h2 v-if="state === states.CONFIRMING" class="tw-px-4 tw-text-2xl">
-      Confirming response...
+      確認回覆中...
     </h2>
     <h2
       v-else-if="state === states.CONFIRMED"
       class="tw-px-4 tw-text-base sm:tw-text-lg"
     >
-      Your response has been confirmed! Feel free to close this browser tab.
+      你的回覆已確認！可以關閉這個分頁了
     </h2>
     <h2
       v-else-if="state === states.ERROR"
       class="tw-px-4 tw-text-base sm:tw-text-lg"
     >
-      Something went wrong while confirming your response. Refresh the page and
-      try again.
+      確認回覆時發生錯誤，請重新整理頁面後再試一次
     </h2>
   </div>
 </template>

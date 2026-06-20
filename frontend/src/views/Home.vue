@@ -37,20 +37,20 @@
         <div
           class="tw-mb-3 tw-text-xl tw-font-medium tw-text-dark-green sm:tw-text-2xl"
         >
-          Tools
+          工具
         </div>
         <div class="tw-flex tw-flex-row tw-items-center tw-gap-2">
           <div
             @click="convertW2M"
             class="tw-cursor-pointer tw-text-sm tw-font-normal tw-text-dark-gray tw-underline"
           >
-            Convert When2meet to Timeful
+            匯入 When2meet 活動
           </div>
           <div
             @click="importTimeful"
             class="tw-cursor-pointer tw-text-sm tw-font-normal tw-text-dark-gray tw-underline"
           >
-            Import Timeful Event
+            匯入 Timeful 活動
           </div>
         </div>
       </div>
@@ -66,7 +66,7 @@
           class="tw-text-xs tw-font-medium tw-text-gray"
           :to="{ name: 'privacy-policy' }"
         >
-          Privacy Policy
+          隱私權政策
         </router-link>
       </div>
 
