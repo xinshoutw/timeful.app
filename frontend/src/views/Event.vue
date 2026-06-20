@@ -46,18 +46,16 @@
         content-class="tw-m-0"
       >
         <v-card>
-          <v-card-title>Are you sure?</v-card-title>
+          <v-card-title>確定嗎？</v-card-title>
           <v-card-text
             ><span class="tw-font-medium"
-              >You're about to add your availability without filling out all
-              pages of this Timeful.</span
+              >你還沒有填完所有頁面的時間就要送出了</span
             >
-            Click the left and right arrows at the top to switch between
-            pages.</v-card-text
+            點擊上方的左右箭頭可以切換頁面</v-card-text
           >
           <v-card-actions>
             <v-spacer />
-            <v-btn text @click="pagesNotVisitedDialog = false">Cancel</v-btn>
+            <v-btn text @click="pagesNotVisitedDialog = false">取消</v-btn>
             <v-btn
               text
               color="primary"
@@ -67,7 +65,7 @@
                   this.pagesNotVisitedDialog = false
                 }
               "
-              >Add anyways</v-btn
+              >仍要送出</v-btn
             >
           </v-card-actions>
         </v-card>
@@ -99,7 +97,7 @@
                     :href="`https://when2meet.com${event.when2meetHref}`"
                     :small="isPhone"
                     class="tw-cursor-pointer tw-select-none tw-rounded tw-bg-light-gray tw-px-2 tw-font-medium sm:tw-px-3"
-                    >Imported from when2meet</v-chip
+                    >從 when2meet 匯入</v-chip
                   >
                   <template v-if="isGroup">
                     <div class="">
@@ -107,15 +105,13 @@
                         :small="isPhone"
                         class="tw-cursor-pointer tw-select-none tw-rounded tw-bg-light-gray tw-px-2 tw-font-medium sm:tw-px-3"
                         @click="helpDialog = true"
-                        >Availability group</v-chip
+                        >共用行事曆群組</v-chip
                       >
                     </div>
                     <HelpDialog v-model="helpDialog">
-                      <template v-slot:header>Availability group</template>
+                      <template v-slot:header>共用行事曆群組</template>
                       <div class="mb-4">
-                        Use availability groups to see group members' weekly
-                        calendar availabilities. Your actual calendar events
-                        are NOT visible to others.
+                        使用共用行事曆群組來查看成員每週的行事曆空閒時間。你的實際行事曆活動不會被其他人看到
                       </div>
                     </HelpDialog>
                   </template>
@@ -151,7 +147,7 @@
                     @click="resetWeekOffset"
                   >
                     <v-icon class="sm:tw-mr-2">mdi-calendar-today</v-icon>
-                    <span v-if="!isPhone">Today</span>
+                    <span v-if="!isPhone">今天</span>
                   </v-btn>
                   <v-btn
                     :icon="isPhone"
@@ -271,7 +267,7 @@
           class="tw-text-xs tw-font-medium tw-text-gray"
           :to="{ name: 'privacy-policy' }"
         >
-          Privacy Policy
+          隱私權政策
         </router-link>
       </div>
 
@@ -293,7 +289,7 @@
               text
               class="tw-text-white"
               @click="scheduleEvent"
-              >Schedule</v-btn
+              >排定行程</v-btn
             >
             <v-spacer />
             <v-btn

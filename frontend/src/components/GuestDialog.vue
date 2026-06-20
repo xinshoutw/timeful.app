@@ -7,7 +7,7 @@
   >
     <v-card>
       <v-card-title class="tw-flex">
-        <div>Continue as guest</div>
+        <div>以訪客身分繼續</div>
         <v-spacer />
         <v-btn icon @click="$emit('input', false)">
           <v-icon>mdi-close</v-icon>
@@ -25,7 +25,7 @@
             v-model="name"
             @keyup.enter="submit"
             :rules="nameRules"
-            placeholder="Enter your name..."
+            placeholder="輸入你的名字..."
             autofocus
             hide-details="auto"
             autocomplete="off"
@@ -36,8 +36,8 @@
             v-model="email"
             @keyup.enter="submit"
             :rules="emailRules"
-            placeholder="Enter your email..."
-            hint="The event creator has requested your email. It will only be visible to them."
+            placeholder="輸入你的 Email..."
+            hint="活動建立者要求提供你的 Email，只有他們能看到"
             persistent-hint
             solo
           ></v-text-field>
@@ -49,7 +49,7 @@
               :dark="formValid"
               :disabled="!formValid"
             >
-              Continue
+              繼續
             </v-btn>
           </div>
         </v-form>
@@ -92,12 +92,12 @@ export default {
     submit() {
       // Set rules only on submit
       this.nameRules = [
-        (name) => !!name || "Name is required",
-        (name) => !this.respondents.includes(name) || "Name already taken",
+        (name) => !!name || "請輸入名字",
+        (name) => !this.respondents.includes(name) || "此名字已被使用",
       ]
       this.emailRules = [
-        (email) => !!email || "Email is required",
-        (email) => !!validateEmail(email) || "Invalid email",
+        (email) => !!email || "請輸入 Email",
+        (email) => !!validateEmail(email) || "Email 格式不正確",
       ]
 
       this.$nextTick(() => {
@@ -122,7 +122,7 @@ export default {
     name() {
       // Default rules before submitting
       this.nameRules = [
-        (name) => !this.respondents.includes(name) || "Name already taken",
+        (name) => !this.respondents.includes(name) || "此名字已被使用",
       ]
     },
     email() {

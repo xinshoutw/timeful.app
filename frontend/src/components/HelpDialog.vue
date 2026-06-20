@@ -6,11 +6,11 @@
     content-class="tw-m-0"
   >
     <v-card>
-      <v-card-title><slot name="header">Help</slot></v-card-title>
+      <v-card-title><slot name="header">說明</slot></v-card-title>
       <v-card-text><slot></slot></v-card-text>
       <v-card-actions>
         <v-spacer />
-        <v-btn text @click="$emit('input', false)">Ok</v-btn>
+        <v-btn text @click="$emit('input', false)">好</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

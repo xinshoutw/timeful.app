@@ -26,14 +26,14 @@
         <v-list-item id="settings-btn" @click="goToSettings">
           <v-list-item-title class="tw-flex tw-items-center tw-gap-1">
             <v-icon class="tw-mr-1" small color="black">mdi-cog</v-icon>
-            Settings
+            設定
           </v-list-item-title>
         </v-list-item>
         <v-divider></v-divider>
         <v-list-item id="sign-out-btn" @click="signOut">
           <v-list-item-title class="red--text tw-flex tw-items-center tw-gap-1">
             <v-icon class="tw-mr-1" small color="red">mdi-logout</v-icon>
-            Sign Out
+            登出
           </v-list-item-title>
         </v-list-item>
       </v-list>
