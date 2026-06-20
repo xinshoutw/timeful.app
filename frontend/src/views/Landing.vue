@@ -45,7 +45,7 @@
             large
             :x-large="$vuetify.breakpoint.mdAndUp"
           >
-            {{ authUser ? "Open dashboard" : "Create event" }}
+            {{ authUser ? "開啟控制台" : "建立活動" }}
           </v-btn>
         </div>
         <div class="tw-relative tw-w-full">

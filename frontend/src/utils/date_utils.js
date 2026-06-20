@@ -639,7 +639,6 @@ export const getCalendarEventsMap = async (
     timeMax = getDateDayOffset(lastDate, 2).toISOString()
   }
 
-  // Fetch calendar events from Google Calendar
   let calendarEventsMap
   if (eventId.length === 0) {
     calendarEventsMap = await get(
