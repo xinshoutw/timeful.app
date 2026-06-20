@@ -20,7 +20,7 @@
       </v-btn>
       <div class="tw-mb-4 tw-flex tw-flex-col tw-items-start tw-gap-4">
         <h2 class="tw-text-xl tw-font-medium">
-          Upgrade to
+          升級至
           <span
             class="tw-bg-gradient-to-r tw-from-darkest-green tw-to-light-green tw-bg-clip-text tw-text-transparent"
             >Timeful Premium</span
@@ -30,23 +30,21 @@
           <template
             v-if="upgradeDialogType === upgradeDialogTypes.CREATE_EVENT"
           >
-            You've run out of free events. Upgrade to create unlimited events.
+            你的免費活動額度已用完。升級即可建立無限活動
             <br class="tw-hidden sm:tw-block" />
-            Your payment helps us keep the site running.
+            你的付款將幫助我們維持網站運作
           </template>
           <template
             v-else-if="upgradeDialogType === upgradeDialogTypes.SCHEDULE_EVENT"
           >
-            Upgrade to schedule events with Timeful. Your payment helps us keep
-            the site running.
+            升級以使用 Timeful 排定行程。你的付款將幫助我們維持網站運作
           </template>
           <template
             v-else-if="
               upgradeDialogType === upgradeDialogTypes.UPGRADE_MANUALLY
             "
           >
-            Create unlimited events with Timeful Premium. Your payment helps us
-            keep the site running.
+            使用 Timeful Premium 建立無限活動。你的付款將幫助我們維持網站運作
           </template>
         </div>
       </div>
@@ -60,7 +58,7 @@
           <div
             class="tw-inline-block tw-w-fit tw-rounded tw-px-2 tw-py-1 tw-text-sm tw-font-medium"
           >
-            Monthly
+            月繳
           </div>
           <div class="tw-relative">
             <div class="tw-font-medium">
@@ -79,7 +77,7 @@
             </v-fade-transition>
           </div>
           <div class="tw-mb-4 tw-text-center tw-text-sm tw-text-very-dark-gray">
-            Per month.<br />Billed monthly.
+            每月<br />按月計費
           </div>
           <v-btn
             class="tw-mb-0.5"
@@ -107,7 +105,7 @@
                 : handleUpgrade(monthlyPrice)
             "
           >
-            Upgrade
+            升級
           </v-btn>
         </div>
         <div
@@ -117,12 +115,12 @@
           <div
             class="tw-absolute -tw-top-3 tw-rounded-full tw-bg-light-green tw-px-2 tw-py-0.5 tw-text-xs tw-font-medium tw-text-white"
           >
-            Save {{ yearlyDiscount }}%
+            省 {{ yearlyDiscount }}%
           </div>
           <div
             class="tw-inline-block tw-w-fit tw-rounded tw-bg-light-green/10 tw-px-2 tw-py-1 tw-text-sm tw-font-medium tw-text-light-green"
           >
-            Yearly
+            年繳
           </div>
           <div class="tw-relative">
             <div class="tw-font-medium">
@@ -141,7 +139,7 @@
             </v-fade-transition>
           </div>
           <div class="tw-mb-4 tw-text-center tw-text-sm tw-text-very-dark-gray">
-            Per month.<br />Billed annually.
+            每月<br />按年計費
           </div>
           <v-btn
             class="tw-mb-0.5"
@@ -168,7 +166,7 @@
                 : handleUpgrade(yearlyPrice)
             "
           >
-            Upgrade
+            升級
           </v-btn>
         </div>
         <div
@@ -178,12 +176,12 @@
           <div
             class="tw-absolute -tw-top-3 tw-rounded-full tw-bg-light-green tw-px-2 tw-py-0.5 tw-text-xs tw-font-medium tw-text-white"
           >
-            Limited time offer
+            限時優惠
           </div>
           <div
             class="tw-inline-block tw-w-fit tw-rounded tw-bg-light-green/10 tw-px-2 tw-py-1 tw-text-sm tw-font-medium tw-text-light-green"
           >
-            Lifetime access
+            終身方案
           </div>
           <div class="tw-relative">
             <div class="tw-font-medium">
@@ -205,7 +203,7 @@
             </v-fade-transition>
           </div>
           <div class="tw-mb-4 tw-text-center tw-text-sm tw-text-very-dark-gray">
-            One-time payment.<br />No subscription.
+            一次付款<br />無需訂閱
           </div>
           <v-btn
             class="tw-mb-0.5"
@@ -232,7 +230,7 @@
                 : handleUpgrade(lifetimePrice)
             "
           >
-            Upgrade
+            升級
           </v-btn>
         </div>
       </div>
@@ -250,9 +248,9 @@
           for="student-checkbox"
           class="tw-flex tw-cursor-pointer tw-select-none tw-flex-col tw-text-sm tw-text-very-dark-gray"
         >
-          <span class="tw-text-sm">I'm a student</span>
+          <span class="tw-text-sm">我是學生</span>
           <span v-if="isStudent" class="tw-text-xs tw-text-dark-gray">
-            Pinky promise that you're actually a student?
+            你真的是學生嗎？拉勾勾？
           </span>
         </label>
       </div>
@@ -275,7 +273,7 @@
       <!-- Header -->
       <div class="tw-mb-6 tw-flex tw-flex-col tw-items-start tw-gap-2">
         <h2 class="tw-text-xl tw-font-medium">
-          Upgrade to
+          升級至
           <span
             class="tw-bg-gradient-to-r tw-from-darkest-green tw-to-light-green tw-bg-clip-text tw-text-transparent"
             >Timeful Premium</span
@@ -285,24 +283,22 @@
           <template
             v-if="upgradeDialogType === upgradeDialogTypes.CREATE_EVENT"
           >
-            You've run out of free events. Upgrade to create unlimited events.
+            你的免費活動額度已用完。升級即可建立無限活動
             <br class="tw-hidden sm:tw-block" />
-            Your payment helps us keep the site running.
+            你的付款將幫助我們維持網站運作
           </template>
           <template
             v-else-if="upgradeDialogType === upgradeDialogTypes.SCHEDULE_EVENT"
           >
-            Upgrade to schedule events with Timeful. Your payment helps us keep
-            the site running.
+            升級以使用 Timeful 排定行程。你的付款將幫助我們維持網站運作
           </template>
           <template
             v-else-if="upgradeDialogType === upgradeDialogTypes.REMOVE_ADS"
           >
-            Upgrade to remove ads. Your payment helps us keep the site running.
+            升級以移除廣告。你的付款將幫助我們維持網站運作
           </template>
           <template v-else>
-            Create unlimited events with Timeful Premium. Your payment helps us
-            keep the site running.
+            使用 Timeful Premium 建立無限活動。你的付款將幫助我們維持網站運作
           </template>
         </div>
       </div>
@@ -316,7 +312,7 @@
           @input="v2BillingCycle = $event"
         >
           <template #option-yearly="{ active }">
-            <span class="tw-line-clamp-1">Yearly</span>
+            <span class="tw-line-clamp-1">年繳</span>
             <span
               v-if="yearlyDiscount > 0"
               class="tw-whitespace-nowrap tw-rounded-full tw-bg-light-green tw-px-1.5 tw-py-0.5 tw-text-xs tw-font-medium tw-text-white"
@@ -334,12 +330,12 @@
         <div
           class="tw-flex tw-flex-1 tw-flex-col tw-rounded-lg tw-border tw-border-light-gray-stroke tw-p-5"
         >
-          <div class="tw-mb-1 tw-text-xl tw-font-medium">Free</div>
+          <div class="tw-mb-1 tw-text-xl tw-font-medium">免費</div>
           <div class="tw-mb-4 tw-text-xs tw-font-medium tw-text-dark-gray">
-            Limited use
+            有限使用
           </div>
           <div class="tw-mb-1 tw-text-4xl tw-font-medium">$0</div>
-          <div class="tw-mb-5 tw-text-xs tw-text-dark-gray">Free, forever</div>
+          <div class="tw-mb-5 tw-text-xs tw-text-dark-gray">永久免費</div>
           <ul class="tw-m-0 tw-mb-5 tw-list-none tw-space-y-2.5 tw-p-0">
             <li
               v-for="item in freeFeatures"
@@ -353,7 +349,7 @@
             </li>
           </ul>
           <v-btn depressed disabled class="tw-mt-auto">
-            <span class="tw-text-very-dark-gray">Your current plan</span>
+            <span class="tw-text-very-dark-gray">目前方案</span>
           </v-btn>
         </div>
 
@@ -377,7 +373,7 @@
             >
           </div>
           <div class="tw-mb-4 tw-text-xs tw-font-medium tw-text-dark-gray">
-            Unlock everything
+            解鎖所有功能
           </div>
           <div class="tw-relative tw-mb-1 tw-flex tw-items-baseline tw-gap-1.5">
             <span
@@ -392,7 +388,7 @@
           </div>
           <div class="tw-mb-5 tw-text-xs tw-text-dark-gray">
             {{
-              v2BillingCycle === "yearly" ? "Billed annually" : "Billed monthly"
+              v2BillingCycle === "yearly" ? "按年計費" : "按月計費"
             }}
           </div>
 
@@ -417,7 +413,7 @@
             :loading="loadingCheckoutUrl[v2ActivePrice?.id]"
             @click="handleUpgrade(v2ActivePrice)"
           >
-            Upgrade
+            升級
           </v-btn>
         </div>
       </div>
@@ -435,9 +431,9 @@
           for="student-checkbox-v2"
           class="tw-flex tw-cursor-pointer tw-select-none tw-flex-col tw-text-sm tw-text-very-dark-gray"
         >
-          <span class="tw-text-sm">I'm a student</span>
+          <span class="tw-text-sm">我是學生</span>
           <span v-if="isStudent" class="tw-text-xs tw-text-dark-gray">
-            Pinky promise that you're actually a student?
+            你真的是學生嗎？拉勾勾？
           </span>
         </label>
       </div>
@@ -532,22 +528,22 @@ export default {
       return this.upgradeDialogType === upgradeDialogTypes.REMOVE_ADS
     },
     freeFeatures() {
-      const events = "Create 3 events per month"
-      const ads = "Ads displayed on all your events"
+      const events = "每月建立 3 個活動"
+      const ads = "所有活動皆顯示廣告"
       return this.isRemoveAdsMode ? [ads, events] : [events, ads]
     },
     premiumFeatures() {
       const events = {
         text: "events",
-        html: 'Create <span class="rdt-h">unlimited events</span> per month',
+        html: '每月建立<span class="rdt-h">無限活動</span>',
       }
       const noAdsOwn = {
         text: "no-ads-own",
-        html: '<span class="rdt-h">No ads</span> displayed on your events',
+        html: '你的活動<span class="rdt-h">不顯示廣告</span>',
       }
       const noAdsOthers = {
         text: "no-ads-others",
-        html: "<span class=\"rdt-h\">Don't see ads</span> on other people's events",
+        html: '瀏覽他人活動時<span class="rdt-h">不會看到廣告</span>',
       }
       return this.isRemoveAdsMode
         ? [noAdsOwn, noAdsOthers, events]
@@ -555,8 +551,8 @@ export default {
     },
     v2BillingOptions() {
       return [
-        { text: "Monthly", value: "monthly", style: { minWidth: "150px" } },
-        { text: "Yearly", value: "yearly", style: { minWidth: "150px" } },
+        { text: "月繳", value: "monthly", style: { minWidth: "150px" } },
+        { text: "年繳", value: "yearly", style: { minWidth: "150px" } },
       ]
     },
     v2ActivePrice() {
@@ -718,7 +714,7 @@ export default {
       } catch (e) {
         console.error(e)
         this.showError(
-          "There was an error generating a checkout url. Please try again later."
+          "產生結帳連結時發生錯誤，請稍後再試"
         )
       } finally {
         this.$set(this.loadingCheckoutUrl, price.id, false)

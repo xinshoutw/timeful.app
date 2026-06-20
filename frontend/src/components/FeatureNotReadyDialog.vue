@@ -2,7 +2,7 @@
   <v-dialog v-model="dialog" max-width="400px" content-class="tw-m-0">
     <v-card>
       <v-card-title>
-        <span class="tw-text-xl tw-font-medium">Oops! Feature Not Ready</span>
+        <span class="tw-text-xl tw-font-medium">功能尚未開放</span>
         <v-spacer />
         <v-btn
           absolute
@@ -14,11 +14,10 @@
         </v-btn>
       </v-card-title>
       <v-card-text class="tw-text-very-dark-gray">
-        You've caught us a bit early! We're considering adding folders to
-        Timeful, and will do so once we get enough demand from users.
+        你來得有點早！我們正在考慮為 Timeful 加入資料夾功能，一旦有足夠的使用者需求就會推出
         <v-textarea
           v-model="folderUsageFeedback"
-          label="What would you like to use folders for?"
+          label="你想要用資料夾來做什麼？"
           rows="3"
           class="tw-mt-4"
           outlined
@@ -27,8 +26,8 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn text @click="dialog = false">Close</v-btn>
-        <v-btn color="primary" @click="submitFeedback">Submit</v-btn>
+        <v-btn text @click="dialog = false">關閉</v-btn>
+        <v-btn color="primary" @click="submitFeedback">送出</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -67,7 +66,7 @@ export default {
         // Optionally, you can clear the textarea and close the dialog
         this.folderUsageFeedback = ""
         this.dialog = false
-        this.showInfo("Thanks for your input!")
+        this.showInfo("感謝你的回饋！")
       } else {
         // Optionally, handle empty feedback (e.g., show a message)
         console.log("Feedback is empty")

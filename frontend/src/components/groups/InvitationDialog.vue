@@ -14,11 +14,11 @@
           <div
             class="tw-mb-5 tw-text-wrap tw-text-xl tw-font-medium tw-text-black"
           >
-            <template v-if="isOwner"> Share calendar availability </template>
+            <template v-if="isOwner"> 分享行事曆空閒時間 </template>
             <template v-else>
-              Accept invitation to share your calendar availability with "{{
+              接受邀請，與「{{
                 group.name
-              }}"?
+              }}」分享你的行事曆空閒時間？
             </template>
           </div>
           <v-expand-transition>
@@ -34,8 +34,7 @@
 
               <div class="tw-mt-5 tw-space-y-4">
                 <div class="tw-font-medium tw-text-black">
-                  Your calendar availability from these calendars will be shared
-                  with:
+                  以下行事曆的空閒時間將會分享給：
                 </div>
                 <div
                   class="tw-flex tw-flex-wrap tw-gap-1"
@@ -48,10 +47,10 @@
                   ></UserChip>
                 </div>
                 <div v-else class="tw-flex tw-items-center tw-italic">
-                  <div>No members added yet</div>
+                  <div>尚未加入任何成員</div>
                 </div>
                 <div class="tw-text-xs tw-text-dark-gray">
-                  Your calendar events will NOT be visible to others
+                  你的行事曆活動不會被其他人看到
                 </div>
               </div>
             </div>
@@ -60,27 +59,27 @@
         </v-card-text>
 
         <v-card-actions v-if="isOwner">
-          <v-btn class="tw-px-6" @click="goHome" text>Back</v-btn>
+          <v-btn class="tw-px-6" @click="goHome" text>返回</v-btn>
           <v-spacer />
           <v-btn
             color="primary"
             @click="acceptInvitation"
             :disabled="!calendarPermissionGranted"
             class="tw-px-6"
-            >Share</v-btn
+            >分享</v-btn
           >
         </v-card-actions>
         <v-card-actions v-else>
           <v-dialog v-model="rejectDialog" width="400" persistent>
             <template v-slot:activator="{ on, attrs }">
               <v-btn text class="tw-text-dark-gray" v-bind="attrs" v-on="on"
-                >Reject invitation</v-btn
+                >拒絕邀請</v-btn
               >
             </template>
             <v-card>
-              <v-card-title>Are you sure?</v-card-title>
+              <v-card-title>確定嗎？</v-card-title>
               <v-card-text
-                >Are you sure you want to reject this invite?</v-card-text
+                >確定要拒絕這個邀請嗎？</v-card-text
               >
               <v-card-actions>
                 <v-spacer />
@@ -88,10 +87,10 @@
                   text
                   class="tw-text-dark-gray"
                   @click="rejectDialog = false"
-                  >Cancel</v-btn
+                  >取消</v-btn
                 >
                 <v-btn text @click="rejectInvitation" color="error"
-                  >I'm sure</v-btn
+                  >確定</v-btn
                 >
               </v-card-actions>
             </v-card>
@@ -101,7 +100,7 @@
             class="tw-bg-green tw-px-5 tw-text-white tw-transition-opacity"
             @click="acceptInvitation"
             :disabled="!calendarPermissionGranted"
-            >Accept Invitation</v-btn
+            >接受邀請</v-btn
           >
         </v-card-actions>
       </v-card>
