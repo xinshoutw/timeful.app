@@ -60,69 +60,6 @@
         </div>
       </div>
 
-      <!-- Calendar Access Section -->
-      <div class="tw-flex tw-flex-col tw-gap-5">
-        <div
-          class="tw-text-xl tw-font-medium tw-text-dark-green sm:tw-text-2xl"
-        >
-          Calendar access
-        </div>
-        <div class="tw-flex tw-flex-col tw-gap-5 sm:tw-flex-row sm:tw-gap-28">
-          <div class="tw-text-black">
-            We do not store your calendar data anywhere on our servers, and we
-            only fetch your calendar events for the time frame you specify in
-            order to display your calendar events while you fill out your
-            availability.
-          </div>
-          <v-btn
-            outlined
-            class="tw-text-red"
-            href="https://myaccount.google.com/connections?filters=3,4&hl=en"
-            target="_blank"
-            >Revoke calendar access</v-btn
-          >
-        </div>
-        <CalendarAccounts></CalendarAccounts>
-      </div>
-
-      <!-- Permissions Section -->
-      <div class="tw-flex tw-flex-col tw-gap-5">
-        <div
-          class="tw-text-xl tw-font-medium tw-text-dark-green sm:tw-text-2xl"
-        >
-          Permissions
-        </div>
-        <div
-          class="tw-flex tw-flex-col tw-rounded-md tw-border-[1px] tw-border-light-gray-stroke"
-        >
-          <div
-            class="tw-flex tw-w-full tw-flex-row tw-border-b-[1px] tw-border-light-gray-stroke"
-          >
-            <div
-              v-for="(h, i) in heading"
-              :class="`tw-border-r-[${i == heading.length - 1 ? '0' : '1'}px]`"
-              class="tw-w-1/3 tw-border-light-gray-stroke tw-p-4 tw-font-bold"
-            >
-              {{ h }}
-            </div>
-          </div>
-
-          <div
-            v-for="(c, j) in content"
-            :class="`tw-border-b-[${j == content.length - 1 ? '0' : '1'}px]`"
-            class="tw-flex tw-w-full tw-flex-row tw-border-light-gray-stroke"
-          >
-            <div
-              v-for="(text, k) in c"
-              :class="`tw-border-r-[${k == c.length - 1 ? '0' : '1'}px]`"
-              class="tw-w-1/3 tw-border-light-gray-stroke tw-p-4"
-            >
-              {{ text }}
-            </div>
-          </div>
-        </div>
-      </div>
-
       <!-- Question Section -->
       <div class="tw-flex tw-flex-col tw-gap-5">
         <div
@@ -191,8 +128,6 @@
 <script>
 import { mapState, mapActions } from "vuex"
 import { _delete, patch, isPhone, get } from "@/utils"
-import CalendarAccounts from "@/components/settings/CalendarAccounts.vue"
-
 export default {
   name: "Settings",
 
@@ -200,25 +135,10 @@ export default {
     title: "Settings - Timeful",
   },
 
-  components: { CalendarAccounts },
-
   data: () => ({
     dialog: false,
     deleteDialog: false,
     deleteValidateEmail: "",
-    heading: ["Permission", "Purpose", "Requested When"],
-    content: [
-      [
-        "View all calendar events",
-        "Allows us to display the names/times of your calendar events",
-        "User tries to input availability automatically with Google Calendar",
-      ],
-      [
-        "View all calendars subscribed to",
-        "Allows us to display calendar events on all your calendars instead of just your primary calendar",
-        "User tries to input availability automatically with Google Calendar",
-      ],
-    ],
 
     // Profile settings
     firstName: "",
