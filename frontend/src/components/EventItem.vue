@@ -41,7 +41,7 @@
           v-if="isGroup && !userHasResponded"
           class="tw-inline-block tw-text-sm tw-italic tw-text-gray"
         >
-          Invited
+          已邀請
         </div>
         <v-chip
           v-else
@@ -69,7 +69,7 @@
           <v-list class="tw-py-1" dense>
             <v-list-item @click="copyLink">
               <v-list-item-content>
-                <v-list-item-title>Copy link</v-list-item-title>
+                <v-list-item-title>複製連結</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
             <v-divider />
@@ -82,24 +82,24 @@
               <template v-slot:activator="{ on, attrs }">
                 <v-list-item id="duplicate-event-btn" v-bind="attrs" v-on="on">
                   <v-list-item-content>
-                    <v-list-item-title>Duplicate</v-list-item-title>
+                    <v-list-item-title>複製</v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
               </template>
               <v-card>
-                <v-card-title>Duplicate {{ typeText }}</v-card-title>
+                <v-card-title>複製{{ typeText }}</v-card-title>
                 <v-card-text>
                   <v-text-field
                     v-model="duplicateDialogOptions.name"
                     required
-                    placeholder="Name your event..."
+                    placeholder="為你的活動命名..."
                     :disabled="duplicateDialogOptions.loading"
                     hide-details
                     solo
                   />
                   <v-checkbox
                     v-model="duplicateDialogOptions.copyAvailability"
-                    label="Copy responses"
+                    label="複製回覆"
                     :disabled="duplicateDialogOptions.loading"
                     hide-details
                     class="tw-mt-2"
@@ -111,14 +111,14 @@
                     text
                     @click="duplicateDialog = false"
                     :disabled="duplicateDialogOptions.loading"
-                    >Cancel</v-btn
+                    >取消</v-btn
                   >
                   <v-btn
                     text
                     color="primary"
                     @click="duplicateEvent"
                     :loading="duplicateDialogOptions.loading"
-                    >Confirm</v-btn
+                    >確認</v-btn
                   >
                 </v-card-actions>
               </v-card>
@@ -136,7 +136,7 @@
                   v-on="onMenu"
                   class="tw-cursor-pointer tw-pr-1 hover:tw-bg-light-gray"
                 >
-                  <v-list-item-title>Move to</v-list-item-title>
+                  <v-list-item-title>移至</v-list-item-title>
                   <v-list-item-icon>
                     <v-icon small>mdi-chevron-right</v-icon>
                   </v-list-item-icon>
@@ -144,7 +144,7 @@
               </template>
               <v-list dense class="tw-py-1">
                 <v-list-item @click="moveEventToFolder(null)" class="tw-pr-1">
-                  <v-list-item-title>No folder</v-list-item-title>
+                  <v-list-item-title>無資料夾</v-list-item-title>
                   <v-list-item-action v-if="folderId === null">
                     <v-icon small>mdi-check</v-icon>
                   </v-list-item-action>
@@ -165,7 +165,7 @@
             <v-divider />
             <v-list-item @click="_archiveEvent">
               <v-list-item-title>{{
-                event.isArchived ? "Unarchive" : "Archive"
+                event.isArchived ? "取消封存" : "封存"
               }}</v-list-item-title>
             </v-list-item>
             <v-dialog v-model="removeDialog" width="400" persistent>
@@ -177,21 +177,20 @@
                   v-on="on"
                 >
                   <v-list-item-content>
-                    <v-list-item-title>Delete {{ typeText }}</v-list-item-title>
+                    <v-list-item-title>刪除{{ typeText }}</v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
               </template>
               <v-card>
-                <v-card-title>Are you sure?</v-card-title>
+                <v-card-title>確定嗎？</v-card-title>
                 <v-card-text
-                  >Are you sure you want to delete this
-                  {{ typeText }}?</v-card-text
+                  >確定要刪除這個{{ typeText }}嗎？</v-card-text
                 >
                 <v-card-actions>
                   <v-spacer />
-                  <v-btn text @click="removeDialog = false">Cancel</v-btn>
+                  <v-btn text @click="removeDialog = false">取消</v-btn>
                   <v-btn text color="error" @click="removeEvent"
-                    >I'm sure</v-btn
+                    >確定</v-btn
                   >
                 </v-card-actions>
               </v-card>
@@ -265,7 +264,7 @@ export default {
       return "eventId"
     },
     typeText() {
-      return this.isGroup ? "group" : "event"
+      return this.isGroup ? "群組" : "活動"
     },
     userHasResponded() {
       return this.event.hasResponded ?? false
@@ -323,7 +322,7 @@ export default {
         })
         .catch((err) => {
           this.showError(
-            "There was a problem removing that event! Please try again later."
+            "刪除活動時發生問題，請稍後再試"
           )
         })
     },
@@ -349,7 +348,7 @@ export default {
         })
         .catch((err) => {
           this.showError(
-            "There was a problem duplicating that event! Please try again later."
+            "複製活動時發生問題，請稍後再試"
           )
         })
         .finally(() => {
@@ -363,7 +362,7 @@ export default {
       immediate: true,
       handler(val) {
         if (val) {
-          this.duplicateDialogOptions.name = `Copy of ${this.event.name}`
+          this.duplicateDialogOptions.name = `${this.event.name} 的副本`
         }
       },
     },
