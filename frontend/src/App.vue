@@ -56,7 +56,7 @@
           }"
           @click="() => _createNew()"
         >
-          + Create new
+          + 新增
         </v-btn>
         <div v-if="authUser" class="sm:tw-ml-4">
           <AuthUserMenu />
