@@ -2,7 +2,7 @@
   <v-dialog v-model="dialog" max-width="500px" content-class="tw-m-0">
     <v-card>
       <v-card-title>
-        <span class="tw-text-xl tw-font-medium">Import Timeful Event</span>
+        <span class="tw-text-xl tw-font-medium">匯入 Timeful 活動</span>
         <v-spacer />
         <v-btn
           absolute
@@ -15,12 +15,11 @@
       </v-card-title>
       <v-card-text class="tw-text-very-dark-gray">
         <p class="tw-mb-4">
-          Paste a Timeful event URL from another instance to import it along
-          with all existing responses.
+          貼上其他 Timeful 實例的活動網址，即可連同所有現有回覆一起匯入
         </p>
         <v-text-field
           v-model="url"
-          label="Event URL"
+          label="活動網址"
           placeholder="https://timeful.app/e/abc123"
           outlined
           dense
@@ -31,14 +30,14 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer />
-        <v-btn text @click="dialog = false" :disabled="loading">Cancel</v-btn>
+        <v-btn text @click="dialog = false" :disabled="loading">取消</v-btn>
         <v-btn
           color="primary"
           :loading="loading"
           :disabled="!url.trim() || loading"
           @click="importEvent"
         >
-          Import
+          匯入
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -94,7 +93,7 @@ export default {
       if (!this.url.trim() || this.loading) return
 
       if (this.isBlockedUrl(this.url.trim())) {
-        this.error = "Not allowed to import from this URL."
+        this.error = "不允許從此網址匯入"
         return
       }
 
@@ -104,17 +103,17 @@ export default {
       try {
         const result = await post("/events/import", { url: this.url.trim() })
         this.dialog = false
-        this.$store.dispatch("showInfo", "Event imported successfully!")
+        this.$store.dispatch("showInfo", "活動匯入成功！")
         this.$router.push(`/e/${result.shortId}`)
       } catch (e) {
-        const msg = e?.parsed?.error || "Failed to import event"
+        const msg = e?.parsed?.error || "匯入活動失敗"
         const errorMessages = {
-          "invalid-url": "Invalid URL. Please enter a valid Timeful event URL.",
-          "remote-fetch-failed": "Could not reach the remote server.",
-          "remote-event-not-found": "Event not found on the remote server.",
-          "private-address": "Not allowed to import from this URL.",
+          "invalid-url": "無效的網址。請輸入有效的 Timeful 活動網址",
+          "remote-fetch-failed": "無法連線至遠端伺服器",
+          "remote-event-not-found": "在遠端伺服器上找不到該活動",
+          "private-address": "不允許從此網址匯入",
           "remote-responses-failed":
-            "Event found but could not fetch responses from the remote server.",
+            "已找到活動，但無法從遠端伺服器取得回覆",
         }
         this.error = errorMessages[msg] || msg
       } finally {

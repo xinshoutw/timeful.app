@@ -7,7 +7,7 @@
       class="tw-m-auto tw-flex tw-max-w-6xl tw-flex-col tw-items-center tw-justify-center sm:tw-flex-row"
     >
       <span>
-        Join our Discord community for updates, feedback, and support!
+        加入我們的 Discord 社群，獲取最新消息、回饋與支援！
       </span>
       <v-btn
         :href="discordUrl"
@@ -18,7 +18,7 @@
         small
         @click="trackDiscordClick"
       >
-        Join Discord
+        加入 Discord
       </v-btn>
     </div>
     <v-btn
@@ -39,7 +39,7 @@ export default {
 
   data() {
     return {
-      discordUrl: "https://discord.gg/v6raNqYxx3",
+      discordUrl: "https://discord.xinshou.tw",
       show: false,
     }
   },

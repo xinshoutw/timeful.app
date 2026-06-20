@@ -6,7 +6,7 @@
     <div
       class="tw-flex tw-items-center tw-justify-between tw-px-4 tw-pt-4 tw-font-medium"
     >
-      <h3>We value your privacy</h3>
+      <h3>我們重視你的隱私</h3>
       <button
         @click="showBanner = false"
         class="tw-text-gray-400 hover:tw-bg-gray-100 hover:tw-text-gray-700 tw-flex tw-h-6 tw-w-6 tw-cursor-pointer tw-items-center tw-justify-center tw-rounded tw-border-0 tw-bg-transparent tw-p-0 tw-text-xl tw-transition-all tw-duration-200"
@@ -18,8 +18,7 @@
     <p
       class="tw-text-gray-600 tw-m-0 tw-px-4 tw-py-2 tw-text-xs tw-leading-tight"
     >
-      We use cookies for analytics to improve our product. Choose your
-      preferences below.
+      我們使用 Cookie 進行分析以改善產品。請在下方選擇你的偏好
     </p>
 
     <v-expand-transition>
@@ -30,7 +29,7 @@
         <v-checkbox v-model="preferences.necessary" disabled hide-details>
           <template v-slot:label>
             <span class="tw-text-gray-700 tw-flex-1 tw-text-sm tw-font-medium"
-              >Essential</span
+              >必要</span
             >
           </template>
         </v-checkbox>
@@ -38,7 +37,7 @@
         <v-checkbox v-model="preferences.analytics" hide-details>
           <template v-slot:label>
             <span class="tw-text-gray-700 tw-flex-1 tw-text-sm tw-font-medium"
-              >Analytics</span
+              >分析</span
             >
           </template>
         </v-checkbox>
@@ -60,13 +59,13 @@
           @click="showCustomizeSection = !showCustomizeSection"
           class="tw-w-full tw-flex-1 tw-cursor-pointer tw-rounded-md tw-border tw-border-solid tw-border-gray tw-bg-white tw-px-3 tw-py-2 tw-text-xs tw-font-medium tw-text-very-dark-gray sm:tw-w-auto"
         >
-          Customize
+          自訂
         </button>
         <button
           @click="acceptAll"
           class="tw-w-full tw-flex-1 tw-cursor-pointer tw-rounded-md tw-bg-green tw-px-3 tw-py-2 tw-text-xs tw-font-medium tw-text-white sm:tw-w-auto"
         >
-          Accept all
+          全部接受
         </button>
       </div>
       <button
@@ -74,7 +73,7 @@
         @click="acceptSelected"
         class="tw-w-full tw-flex-1 tw-cursor-pointer tw-rounded-md tw-bg-blue tw-px-3 tw-py-2 tw-text-xs tw-font-medium tw-text-white"
       >
-        Save
+        儲存
       </button>
     </div>
   </div>

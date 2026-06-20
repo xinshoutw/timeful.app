@@ -3,7 +3,7 @@
     <v-card>
       <v-card-title>
         <span class="tw-text-xl tw-font-medium"
-          >Convert When2meet to Timeful</span
+          >將 When2meet 轉換為 Timeful</span
         >
         <v-spacer />
         <v-btn
@@ -17,21 +17,19 @@
       </v-card-title>
       <v-card-text class="tw-text-very-dark-gray">
         <p class="tw-mb-4">
-          If someone accidentally sends you a When2meet link instead of a
-          Timeful, you can convert it by following these steps:
+          如果有人不小心傳了 When2meet 連結給你，你可以按照以下步驟將它轉換為 Timeful：
         </p>
         <ol class="tw-mb-6 tw-list-decimal tw-pl-5">
-          <li>Go to your When2meet event link.</li>
-          <li>Add "better" to the beginning of the URL.</li>
+          <li>前往你的 When2meet 活動連結</li>
+          <li>在網址開頭加上「better」</li>
           <li>🪄💫✨</li>
-          <li>Send link back to the group chat.</li>
+          <li>將連結傳回群組聊天</li>
         </ol>
         <p>
-          That's it! The date range, time range, and ALL THE EXISTING RESPONSES
-          will be copied over as well.
+          就這樣！日期範圍、時間範圍，以及所有現有的回覆都會一併複製過來
         </p>
 
-        <p class="tw-mb-2 tw-font-medium">Watch how to do it:</p>
+        <p class="tw-mb-2 tw-font-medium">觀看操作方式：</p>
         <div class="video-container tw-mb-4">
           <!-- Replace YOUR_YOUTUBE_VIDEO_ID with the actual ID -->
           <iframe
@@ -48,7 +46,7 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="primary" text @click="dialog = false"> Got it! </v-btn>
+        <v-btn color="primary" text @click="dialog = false"> 了解！ </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

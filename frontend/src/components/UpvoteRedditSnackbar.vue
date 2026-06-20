@@ -10,8 +10,7 @@
     color="#333"
     content-class="tw-flex tw-items-center tw-gap-x-2"
   >
-    Enjoying Timeful? Help us reach more people by upvoting our Reddit post and
-    leaving a comment with your thoughts :)
+    喜歡 Timeful 嗎？幫我們在 Reddit 上按讚並留言，讓更多人認識我們 :)
     <v-btn
       :href="redditUrl"
       target="_blank"
@@ -19,7 +18,7 @@
       color="#FF4501"
       @click="trackRedditClick"
     >
-      Upvote
+      按讚
       <v-icon small class="-tw-mr-px -tw-mt-px">mdi-arrow-up-bold</v-icon>
     </v-btn>
     <template v-slot:action="{ attrs }">

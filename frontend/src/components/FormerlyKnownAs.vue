@@ -10,7 +10,7 @@
         href="/blog/schej-is-now-timeful/"
         class="tw-cursor-pointer tw-select-none tw-text-sm tw-text-dark-gray hover:tw-underline"
       >
-        Formerly known as "Schej"
+        前身為「Schej」
       </a>
     </div>
   </div>

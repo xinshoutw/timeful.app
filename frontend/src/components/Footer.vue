@@ -29,7 +29,7 @@
         </div>
         <div class="tw-flex tw-flex-col tw-gap-2">
           <router-link :to="{ name: 'privacy-policy' }" class="tw-text-sm">
-            Privacy Policy
+            隱私權政策
           </router-link>
         </div>
       </div>
