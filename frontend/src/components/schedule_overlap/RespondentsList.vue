@@ -553,11 +553,17 @@ export default {
       return isPhone(this.$vuetify)
     },
     orderedRespondents() {
-      const orderedRespondents = [...this.respondents]
-      orderedRespondents.sort((a, b) => {
-        return (a.firstName || "").localeCompare(b.firstName || "")
-      })
-      return orderedRespondents
+      const sorted = [...this.respondents].sort((a, b) =>
+        (a.firstName || "").localeCompare(b.firstName || "")
+      )
+      // ponytail: reorder for column-major layout in a 2-col grid
+      const mid = Math.ceil(sorted.length / 2)
+      const result = []
+      for (let i = 0; i < mid; i++) {
+        result.push(sorted[i])
+        if (i + mid < sorted.length) result.push(sorted[i + mid])
+      }
+      return result
     },
     respondentsListMaxHeight() {
       return Math.max(this.desktopMaxHeight, this.respondentsListMinHeight)
