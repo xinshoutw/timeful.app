@@ -1,51 +1,79 @@
 <div align="center">
-  
+
 <img src="./.github/assets/images/logo.svg" width="200px" alt="Timeful logo" />
 
-</div>
-<br />
-<div align="center">
+[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-orange.svg?style=for-the-badge)](https://www.gnu.org/licenses/agpl-3.0)
+[![Go](https://img.shields.io/badge/Go-1.21+-00ADD8?style=for-the-badge&logo=go&logoColor=white)](https://go.dev)
+[![Vue](https://img.shields.io/badge/Vue_2-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white)](https://vuejs.org)
+[![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com)
 
-[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-orange.svg)](https://www.gnu.org/licenses/agpl-3.0)
-[![Donate](https://img.shields.io/badge/-Donate%20with%20Paypal-blue?logo=paypal)](https://www.paypal.com/donate/?hosted_button_id=KWCH6LGJCP6E6)
-[![X (formerly Twitter) Follow](https://img.shields.io/twitter/follow/timeful_app?label=%40timeful_app&labelColor=white)](https://x.com/timeful_app)
-[![Discord](https://img.shields.io/badge/-Join%20Discord-7289DA?logo=discord&logoColor=white)](https://discord.gg/v6raNqYxx3)
-[![Subreddit subscribers](https://img.shields.io/reddit/subreddit-subscribers/schej?label=join%20r%2Fschej)](https://www.reddit.com/r/schej/)
+**繁體中文** | [English](README-en.md)
 
 </div>
 
-<img src="./.github/assets/images/hero.jpg" alt="Timeful hero" />
+## 總覽
 
-Timeful is a scheduling platform helps you find the best time for a group to meet. It is a free availability poll that is easy to use and integrates with your calendar.
+Timeful 是一個開源的**團體時間配對工具**，幫助你快速找到一群人都有空的時段
 
-Hosted version of the site: https://timeful.app
+建立活動、分享連結，每個人標記自己的空檔，Timeful 自動算出最多人有空的時間。不需要登入，填完即走
 
-Built with [Vue 2](https://github.com/vuejs/vue), [MongoDB](https://github.com/mongodb/mongo), [Go](https://github.com/golang/go), and [TailwindCSS](https://github.com/tailwindlabs/tailwindcss)
+線上體驗：https://timeful.ntust.org
 
-## Demo
+## 功能
 
-[![demo video](http://markdown-videos-api.jorgenkh.no/youtube/vFkBC8BrkOk)](https://www.youtube.com/watch?v=vFkBC8BrkOk)
+### 📅 **時間配對**
+- 建立活動，設定日期與時段範圍
+- 分享連結，所有人直接在網頁上標記空檔
+- 即時顯示重疊結果，一眼找出最佳時間
+- 支援「有空」與「如果需要」兩種標記
+- 可篩選特定成員查看重疊情況
 
-## Features
+### 📋 **雙欄回覆列表**
+- 桌面版使用多欄排列，一眼看到所有人的狀態
 
-- See when everybody's availability overlaps
-- Easily specify date + time ranges to meet between
-- Google calendar, Outlook, Apple calendar integration
-- "Available" vs. "If needed" times
-- Determine when a subset of people are available
-- Schedule across different time zones
-- Email notifications + reminders
-- Duplicating polls
-- Availability groups - stay up to date with people's real-time calendar availability
-- Export availability as CSV
-- Only show responses to event creator
+### 🌐 **繁體中文介面**
+- 全站中文化，包含建立活動、填寫空檔、查看結果、設定等
+- 預設活動標題與描述為中文
 
-## Plugin API
+### 🌍 **跨時區支援**
+- 自動偵測使用者時區
+- 不同時區的人填寫同一份活動也不會錯位
 
-Read these docs to design your own browser plugins to get + set availability on Timeful events programmatically!
+### 🧹 **乾淨無廣告**
+- 沒有廣告、沒有彈窗
+- 不需要第三方登入，填完即走
 
-[Plugin API Docs](./PLUGIN_API_README.md)
+### 🔧 **適合自架**
+- Docker Compose 一鍵部署
+- OTP 驗證信支援自訂 SMTP
+- 免費帳號可建立 100 個活動
+- Self-host 可直接開啟 Premium（無限活動）
+- 頭像支援 [Gravatar](https://gravatar.com/)
 
-## Self-hosting
+### 📦 **其他**
+- 活動複製
+- Email 通知與提醒
+- 匯出 CSV
+- 可設定僅活動建立者能查看回覆
+- 瀏覽器外掛 API（[文件](./PLUGIN_API_README.md)）
 
-See the [Deployment Guide](./DEPLOYMENT.md) for Docker Compose and NixOS setup instructions.
+## Self-Hosting
+
+請參考 [Deployment Guide](./DEPLOYMENT.md)，內含 Docker Compose 與 NixOS 的設定說明
+
+### SMTP 環境變數
+
+| 變數 | 說明 |
+|------|------|
+| `SMTP_HOST` | SMTP 伺服器位址 |
+| `SMTP_PORT` | SMTP 連接埠（預設 587） |
+| `SMTP_USERNAME` | SMTP 帳號 |
+| `SMTP_PASSWORD` | SMTP 密碼 |
+| `SMTP_FROM_ADDRESS` | 寄件人地址 |
+| `SMTP_FROM_NAME` | 寄件人顯示名稱 |
+
+完整環境變數清單請參考 `server/.env.template`
+
+## 授權
+
+本專案採用 [GNU Affero General Public License v3.0](LICENSE) 授權
